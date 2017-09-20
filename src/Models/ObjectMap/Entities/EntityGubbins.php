@@ -47,7 +47,7 @@ class EntityGubbins
      */
     private $isPolymorphicAffected = null;
 
-//TODO: move the checking part of this to the set stubs method.
+    //TODO: move the checking part of this to the set stubs method.
     public function isPolymorphicAffected()
     {
         if (null !== $this->isPolymorphicAffected) {
@@ -168,7 +168,6 @@ class EntityGubbins
      */
     public function setStubs(array $stubs)
     {
-
         foreach ($stubs as $field) {
             if (!$field instanceof AssociationStubBase) {
                 $msg = 'Stubs array must only have AssociationStubBase objects';
@@ -187,5 +186,4 @@ class EntityGubbins
         $propertyName = $stub->getRelationName();
         $this->associations[$propertyName] = $association;
     }
-
 }
