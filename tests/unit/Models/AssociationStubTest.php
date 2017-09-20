@@ -2,6 +2,9 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubMonomorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubPolymorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubRelationType;
 use Mockery as m;
 
 class AssociationStubTest extends TestCase

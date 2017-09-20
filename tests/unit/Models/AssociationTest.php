@@ -2,6 +2,8 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\Association;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubBase;
 use Mockery as m;
 
 class AssociationTest extends TestCase

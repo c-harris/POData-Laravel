@@ -2,7 +2,8 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
-use AlgoWeb\PODataLaravel\Models\AssociationStubRelationType as RelType;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubPolymorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubRelationType as RelType;
 
 class MetadataTraitExtractionTest extends TestCase
 {

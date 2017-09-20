@@ -1,6 +1,12 @@
 <?php
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubMonomorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubPolymorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubRelationType;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityField;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityFieldType;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityGubbins;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;

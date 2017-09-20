@@ -2,6 +2,10 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubPolymorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityField;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityGubbins;
+
 class EntityGubbinsTest extends TestCase
 {
     public function testSimpleGettersAndSetters()

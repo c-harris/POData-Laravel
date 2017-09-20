@@ -2,6 +2,9 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\Association;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityGubbins;
+
 class MetadataGubbinsHolder
 {
     protected $relations = [];
@@ -43,6 +46,11 @@ class MetadataGubbinsHolder
         return $relStubs;
     }
 
+    /**
+     * @param $className
+     *
+     * @return array
+     */
     public function getRelationsByClass($className)
     {
         $this->checkClassExists($className);

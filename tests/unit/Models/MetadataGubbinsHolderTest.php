@@ -2,6 +2,10 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubMonomorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubPolymorphic;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\Association\AssociationStubRelationType;
+
 class MetadataGubbinsHolderTest extends TestCase
 {
     public function testAddSameModelTwice()

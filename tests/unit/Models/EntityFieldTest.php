@@ -2,6 +2,9 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityField;
+use AlgoWeb\PODataLaravel\Models\ObjectMap\Entity\EntityFieldType;
+
 class EntityFieldTest extends TestCase
 {
     public function testGettersSetters()
