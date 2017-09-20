@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: Barnso
  * Date: 20/09/2017
- * Time: 4:58 PM
+ * Time: 4:58 PM.
  */
-
 namespace AlgoWeb\PODataLaravel\Models\ObjectMap;
-
 
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\Association;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityGubbins;
