@@ -183,5 +183,4 @@ class EntityGubbins
         $propertyName = $stub->getRelationName();
         $this->associations[$propertyName] = $association;
     }
-
 }
