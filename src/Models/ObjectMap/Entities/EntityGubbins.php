@@ -143,5 +143,4 @@ class EntityGubbins
         $propertyName = ($isFirst ? $association->getFirst() : $association->getLast())->getRelationName();
         $this->associations[$propertyName] = $association;
     }
-
 }
