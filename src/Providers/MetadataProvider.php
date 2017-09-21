@@ -218,8 +218,8 @@ class MetadataProvider extends MetadataBaseProvider
     {
         $this->app->singleton(
             'metadata', function ($app) {
-            return new SimpleMetadataProvider('Data', self::$metaNAMESPACE);
-        }
+                return new SimpleMetadataProvider('Data', self::$metaNAMESPACE);
+            }
         );
     }
 
