@@ -92,7 +92,6 @@ class MetadataProvider extends MetadataBaseProvider
             if ($association instanceof AssociationMonomorphic) {
                 $this->implementAssociations($objectModel, $association);
             } else {
-
             }
         }
     }
