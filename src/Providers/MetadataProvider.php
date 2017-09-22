@@ -35,22 +35,22 @@ class MetadataProvider extends MetadataBaseProvider
     protected static $afterVerify;
     protected static $afterImploment;
 
-    public static function setAfterExtract(Callable $method)
+    public static function setAfterExtract(callable $method)
     {
         self::$afterExtract = $method;
     }
 
-    public static function setAfterUnify(Callable $method)
+    public static function setAfterUnify(callable $method)
     {
         self::$afterUnify = $method;
     }
 
-    public static function setAfterVerify(Callable $method)
+    public static function setAfterVerify(callable $method)
     {
         self::$afterVerify = $method;
     }
 
-    public static function setAfterImploment(Callable $method)
+    public static function setAfterImploment(callable $method)
     {
         self::$afterImploment = $method;
     }
@@ -184,7 +184,7 @@ class MetadataProvider extends MetadataBaseProvider
     }
 
     /**
-     * @param Map $objectModel
+     * @param Map                    $objectModel
      * @param AssociationPolymorphic $association
      */
     private function implementAssociationsPolymorphic(Map $objectModel, AssociationPolymorphic $association)
@@ -246,7 +246,6 @@ class MetadataProvider extends MetadataBaseProvider
                     }
             }
         }
-
     }
 
     private function implementProperties(EntityGubbins $unifiedEntity)
