@@ -5,8 +5,8 @@ namespace AlgoWeb\PODataLaravel\Models;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationStubPolymorphic;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityField;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityGubbins;
-use POData\Providers\Metadata\ResourceEntityType;
 use Mockery as m;
+use POData\Providers\Metadata\ResourceEntityType;
 
 class EntityGubbinsTest extends TestCase
 {
