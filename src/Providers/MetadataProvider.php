@@ -294,7 +294,7 @@ class MetadataProvider extends MetadataBaseProvider
     /**
      * Bootstrap the application services.  Post-boot.
      *
-     * @param  mixed $reset
+     * @param mixed $reset
      *
      * @return void
      */
