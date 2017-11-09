@@ -297,7 +297,7 @@ class LaravelReadQuery
      * @param ResourceSet|null    $resourceSet
      * @param KeyDescriptor|null  $keyDescriptor
      * @param Model|Relation|null $sourceEntityInstance Starting point of query
-     * $param array               $whereCondition
+     *                                                  $param array               $whereCondition
      * @param string[]|null       $eagerLoad            array of relations to eager load
      *
      * @return Model|null
@@ -474,7 +474,7 @@ class LaravelReadQuery
     }
 
     /**
-     * @param string[]|null $eagerLoad
+     * @param  string[]|null $eagerLoad
      * @return array
      */
     private function processEagerLoadList(array $eagerLoad = null)
