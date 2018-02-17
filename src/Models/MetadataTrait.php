@@ -234,8 +234,8 @@ trait MetadataTrait
                             'Function definition must have keyword \'function\''
                         );
                         $begin = strpos($code, 'function(');
-                        $code = substr($code, /** @scrutinizer ignore-type */$begin, strrpos($code, '}')-$begin+1);
-                        $lastCode = $code[strlen(/** @scrutinizer ignore-type */$code)-1];
+                        $code = substr($code, /* @scrutinizer ignore-type */$begin, strrpos($code, '}')-$begin+1);
+                        $lastCode = $code[strlen(/* @scrutinizer ignore-type */$code)-1];
                         assert('}' == $lastCode, 'Final character of function definition must be closing brace');
                         foreach ([
                                      'hasMany',
@@ -250,7 +250,7 @@ trait MetadataTrait
                                      'morphedByMany'
                                  ] as $relation) {
                             $search = '$this->' . $relation . '(';
-                            if (stripos(/** @scrutinizer ignore-type */$code, $search)) {
+                            if (stripos(/* @scrutinizer ignore-type */$code, $search)) {
                                 //Resolve the relation's model to a Relation object.
                                 $relationObj = $model->$method();
                                 if ($relationObj instanceof Relation) {
@@ -372,7 +372,7 @@ trait MetadataTrait
 
         foreach ($getterz as $getter) {
             $residual = substr($getter, 3);
-            $residual = substr(/** @scrutinizer ignore-type */$residual, 0, -9);
+            $residual = substr(/* @scrutinizer ignore-type */$residual, 0, -9);
             $methods[] = $residual;
         }
         return $methods;
@@ -481,6 +481,7 @@ trait MetadataTrait
      * @param             $targ
      * @param string|null $targ
      * @param null|mixed  $type
+     * @param null|mixed  $through
      */
     private function addRelationsHook(&$hooks, $first, $property, $last, $mult, $targ, $type = null, $through = null)
     {
