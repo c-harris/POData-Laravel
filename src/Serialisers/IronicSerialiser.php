@@ -1034,7 +1034,7 @@ class IronicSerialiser implements IObjectSerialiser
      *
      * @return POData\ObjectModel\ODataPropertyContent|null
      */
-    static::/**
+    static::/*
      * @param Mockery_41_POData_Providers_Metadata_ResourceType|ResourceType                                                     $resourceType
      * @param AlgoWeb\PODataLaravel\Models\TestMonomorphicTarget|AlgoWeb\PODataLaravel\Serialisers\reusableEntityClass1|string[] $result
      * @param string                                                                                                             $propertyName
