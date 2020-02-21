@@ -3,8 +3,6 @@
 
 namespace Tests\System\AlgoWeb\PODataLaravel\Tests;
 
-
-class QueryTests
+class QueryTest
 {
-
 }
