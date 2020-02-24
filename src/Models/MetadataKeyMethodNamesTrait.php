@@ -26,7 +26,8 @@ trait MetadataKeyMethodNamesTrait
     {
         return $this->polyglotKey($rel, false);
     }
-    protected function polyglotKey($rel, $fk){
+    protected function polyglotKey($rel, $fk)
+    {
         switch (true) {
             case $rel instanceof BelongsTo:
                 $key = $fk ?
