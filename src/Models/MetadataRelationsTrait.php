@@ -80,9 +80,9 @@ trait MetadataRelationsTrait
         return !empty($rels['UnknownPolyMorphSide']);
     }
     /**
-     * @param \ReflectionMethod $method
-     * @return string
+     * @param  \ReflectionMethod         $method
      * @throws InvalidOperationException
+     * @return string
      */
     protected function GetCodeForMethod(\ReflectionMethod $method) : string
     {
