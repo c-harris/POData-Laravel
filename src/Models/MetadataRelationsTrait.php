@@ -162,7 +162,7 @@ trait MetadataRelationsTrait
                     'belongsTo' => ['HasOne'],
                     'morphTo' => ['UnknownPolyMorphSide'],
                 ];
-                foreach($relToKeyMap[$relation] as $key){
+                foreach ($relToKeyMap[$relation] as $key) {
                     $relationships[$key][$method] = $targObject;
                 }
             }
