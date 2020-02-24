@@ -41,7 +41,7 @@ trait MetadataKeyMethodNamesTrait
             case $rel instanceof HasOneOrMany:
                 $key = $fk ?
                     $rel->getForeignKeyName() :
-                    $rel->{$this->checkMethodNameList($rel, ['getLocalKeyName', 'getQualifiedParentKeyName'])}()
+                    $rel->{$this->checkMethodNameList($rel, ['getLocalKeyName', 'getQualifiedParentKeyName'])}();
                 break;
             case $rel instanceof HasManyThrough:
                 $key = $fk ?
