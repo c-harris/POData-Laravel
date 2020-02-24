@@ -147,7 +147,7 @@ trait MetadataRelationsTrait
                     continue;
                 }
                 $targObject = $biDir ? $relationObj : '\\' . get_class($relObject);
-                switch($relation){
+                switch ($relation) {
                     case 'morphedByMany':
                         $relationships['UnknownPolyMorphSide'][$method] = $targObject;
                         $relationships['HasMany'][$method] = $targObject;
