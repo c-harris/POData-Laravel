@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: alex
  * Date: 20/02/20
- * Time: 12:35 PM
+ * Time: 12:35 PM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Unit\Serialisers;
 
 use AlgoWeb\PODataLaravel\Orchestra\Tests\TestCase;
