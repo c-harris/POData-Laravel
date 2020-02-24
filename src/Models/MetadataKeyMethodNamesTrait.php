@@ -20,34 +20,18 @@ trait MetadataKeyMethodNamesTrait
 {
     protected function polyglotFkKey(Relation $rel)
     {
-        return $this->polyglotKey($rel, true);
-    }
-    protected function polyglotRkKey(Relation $rel)
-    {
-        return $this->polyglotKey($rel, false);
-    }
-    protected function polyglotKey($rel, $fk)
-    {
         switch (true) {
             case $rel instanceof BelongsTo:
-                $key = $fk ?
-                    $rel->{$this->checkMethodNameList($rel, ['getForeignKeyName', 'getForeignKey'])}() :
-                    $rel->{$this->checkMethodNameList($rel, ['getOwnerKey', 'getOwnerKeyName'])}();
+                $key =  $rel->{$this->checkMethodNameList($rel, ['getForeignKeyName', 'getForeignKey'])}();
                 break;
             case $rel instanceof BelongsToMany:
-                $key = $fk ?
-                    $rel->getForeignPivotKeyName() :
-                    $rel->getRelatedPivotKeyName();
+                $key = $rel->getForeignPivotKeyName();
                 break;
             case $rel instanceof HasOneOrMany:
-                $key = $fk ?
-                    $rel->getForeignKeyName() :
-                    $rel->{$this->checkMethodNameList($rel, ['getLocalKeyName', 'getQualifiedParentKeyName'])}();
+                $key = $rel->getForeignKeyName();
                 break;
             case $rel instanceof HasManyThrough:
-                $key = $fk ?
-                    $rel->getQualifiedFarKeyName() :
-                    $rel->getQualifiedParentKeyName();
+                $key =  $rel->getQualifiedFarKeyName();
                 break;
             default:
                 $msg = sprintf('Unknown Relationship Type %s', get_class($rel));
@@ -56,6 +40,29 @@ trait MetadataKeyMethodNamesTrait
         $segments = explode('.', $key);
         return end($segments);
     }
+    protected function polyglotRkKey(Relation $rel)
+    {
+        switch (true) {
+            case $rel instanceof BelongsTo:
+                $key = $rel->{$this->checkMethodNameList($rel, ['getOwnerKey', 'getOwnerKeyName'])}();
+                break;
+            case $rel instanceof BelongsToMany:
+                $key = $rel->getRelatedPivotKeyName();
+                break;
+            case $rel instanceof HasOneOrMany:
+                $key = $rel->{$this->checkMethodNameList($rel, ['getLocalKeyName', 'getQualifiedParentKeyName'])}();
+                break;
+            case $rel instanceof HasManyThrough:
+                $key = $rel->getQualifiedParentKeyName();
+                break;
+            default:
+                $msg = sprintf('Unknown Relationship Type %s', get_class($rel));
+                throw new InvalidOperationException($msg);
+        }
+        $segments = explode('.', $key);
+        return end($segments);
+    }
+
     protected function polyglotThroughKey(Relation $rel)
     {
         $key = $rel->{$this->checkMethodNameList($rel, ['getThroughKey', 'getQualifiedFirstKeyName'])}();
