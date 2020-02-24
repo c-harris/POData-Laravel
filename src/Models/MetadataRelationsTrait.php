@@ -140,13 +140,13 @@ trait MetadataRelationsTrait
             foreach (static::$relTypes as $relation) {
                 //Resolve the relation's model to a Relation object.
                 if (
-                    !stripos($code, sprintf('$this->%s(',$relation)) ||
+                    !stripos($code, sprintf('$this->%s(', $relation)) ||
                     !(($relationObj = $model->$method()) instanceof Relation) ||
                     !in_array(MetadataTrait::class, class_uses($relObject = $relationObj->getRelated()))
                 ) {
                     continue;
                 }
-                $targObject = $biDir ? $relationObj : '\\' . get_class($relObject);;
+                $targObject = $biDir ? $relationObj : '\\' . get_class($relObject);
                 if (in_array($relation, static::$manyRelTypes)) {
                     //Collection or array of models (because Collection is Arrayable)
                     $relationships['HasMany'][$method] = $targObject;
