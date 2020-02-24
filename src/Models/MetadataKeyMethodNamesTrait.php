@@ -46,16 +46,16 @@ trait MetadataKeyMethodNamesTrait
             $fkList = ['getForeignKeyName', 'getForeignKey'];
             // getOwnerKeyName for laravel 5.5
             $rkList = ['getOwnerKey', 'getOwnerKeyName'];
-        }elseif ($foo instanceof BelongsToMany) {
+        } elseif ($foo instanceof BelongsToMany) {
             $fkList = ['getForeignPivotKeyName'];
             $rkList = ['getRelatedPivotKeyName'];
-        }elseif($foo instanceof HasOneOrMany){
+        } elseif ($foo instanceof HasOneOrMany) {
             $fkList = ['getForeignKeyName'];
             $rkList = ['getLocalKeyName'];
-        }elseif($foo instanceof HasManyThrough) {
+        } elseif ($foo instanceof HasManyThrough) {
             $fkList = ['getQualifiedFarKeyName'];
             $rkList = ['getQualifiedParentKeyName'];
-        }else{
+        } else {
             $msg = sprintf('Unknown Relationship Type %s', get_class($foo));
             throw new InvalidOperationException($msg);
         }
