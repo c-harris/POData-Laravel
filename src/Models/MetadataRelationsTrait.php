@@ -80,9 +80,9 @@ trait MetadataRelationsTrait
         return !empty($rels['UnknownPolyMorphSide']);
     }
     /**
-     * @param \ReflectionMethod $method
-     * @return string
+     * @param  \ReflectionMethod         $method
      * @throws InvalidOperationException
+     * @return string
      */
     protected function getCodeForMethod(\ReflectionMethod $method) : string
     {
@@ -162,7 +162,7 @@ trait MetadataRelationsTrait
                     'belongsTo' => ['HasOne'],
                     'morphTo' => ['UnknownPolyMorphSide'],
                 ];
-                foreach($relToKeyMap[$relation] as $key){
+                foreach ($relToKeyMap[$relation] as $key) {
                     $relationships[$key][$method] = $targObject;
                 }
             }
