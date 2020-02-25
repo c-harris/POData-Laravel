@@ -103,7 +103,6 @@ class MetadataBidirectionalTest extends TestCase
         $this->assertTrue(isset($actual));
         $this->assertTrue(is_array($actual));
         $this->assertEquals(count($expected), count($actual));
-
     }
 
     public function testPolymorphicKnownManySide()
