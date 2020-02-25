@@ -35,6 +35,7 @@ abstract class AssociationStubFactory
         return $stub;
 
     }
+    
     private static function getHandlerMethod(Relation $relation):string
     {
         $methods = [];
