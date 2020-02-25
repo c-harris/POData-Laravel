@@ -64,7 +64,7 @@ class MetadataBidirectionalTest extends TestCase
         $bar = new TestMonomorphicManyTarget();
 
         $expectedFoo = [
-            "manySource",
+            'manySource',
         ];
 
         $expectedBar = ['manyTarget'];
@@ -93,17 +93,16 @@ class MetadataBidirectionalTest extends TestCase
         $foo = new TestMorphTarget();
 
         $expected =  [
-            "morph",
-            "childMorph",
-            "monomorphicChildren",
-            "monomorphicParent",
+            'morph',
+            'childMorph',
+            'monomorphicChildren',
+            'monomorphicParent',
         ];
 
         $actual = $foo->getRelationships();
         $this->assertTrue(isset($actual));
         $this->assertTrue(is_array($actual));
         $this->assertEquals(count($expected), count($actual));
-
     }
 
     public function testPolymorphicKnownManySide()
