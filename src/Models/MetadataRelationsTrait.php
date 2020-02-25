@@ -29,7 +29,7 @@ trait MetadataRelationsTrait
      */
     public function getRelationships()
     {
-            return  $this->getRelationshipsFromMethods();
+        return  $this->getRelationshipsFromMethods();
     }
 
     private $hasUnknownPolymorphic = false;
