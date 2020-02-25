@@ -37,7 +37,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expected as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expected[$key], $actual[$key]);
-
         }
     }
 
@@ -65,8 +64,8 @@ class MetadataBidirectionalTest extends TestCase
         $bar = new TestMonomorphicManyTarget();
 
         $expectedFoo = [
-"manySource",
-];
+            "manySource",
+        ];
 
         $expectedBar = ['manyTarget'];
 
@@ -95,12 +94,11 @@ class MetadataBidirectionalTest extends TestCase
         $foo = new TestMorphTarget();
 
         $expected =  [
-"morph",
- "childMorph",
- "monomorphicChildren",
-"monomorphicParent",
-]
-;
+            "morph",
+            "childMorph",
+            "monomorphicChildren",
+            "monomorphicParent",
+        ];
 
         $actual = $foo->getRelationships();
         $this->assertTrue(isset($actual));
@@ -145,7 +143,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expected as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expected[$key], $actual[$key]);
-
         }
     }
 
@@ -163,7 +160,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expected as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expected[$key], $actual[$key]);
-
         }
     }
 
@@ -181,7 +177,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expected as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expected[$key], $actual[$key]);
-
         }
     }
 
@@ -199,7 +194,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expected as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expected[$key], $actual[$key]);
-
         }
     }
 
@@ -219,7 +213,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expected as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expected[$key], $actual[$key]);
-
         }
     }
 }
