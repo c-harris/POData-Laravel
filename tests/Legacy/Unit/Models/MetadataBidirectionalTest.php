@@ -77,7 +77,6 @@ class MetadataBidirectionalTest extends TestCase
         foreach ($expectedFoo as $key => $outer) {
             $this->assertTrue(isset($actual[$key]));
             $this->assertEquals($expectedFoo[$key], $actual[$key]);
-
         }
 
         $actual = $bar->getRelationships();
