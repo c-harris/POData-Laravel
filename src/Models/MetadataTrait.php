@@ -315,12 +315,6 @@ trait MetadataTrait
      */
     public function extractGubbins()
     {
-        $multArray = [
-            '*' => AssociationStubRelationType::MANY(),
-            '1' => AssociationStubRelationType::ONE(),
-            '0..1' => AssociationStubRelationType::NULL_ONE()
-        ];
-
         $gubbins = new EntityGubbins();
         $gubbins->setName($this->getEndpointName());
         $gubbins->setClassName(get_class($this));
@@ -358,7 +352,7 @@ trait MetadataTrait
                 $msg = 'Property names must be unique, without regard to case';
                 throw new \Exception($msg);
             }
-            $stub = AssociationStubFactory::associationStubFromRelation($propertyName, $this->{$propertyName}());
+            $stub = AssociationStubFactory::associationStubFromRelation($this, $propertyName);
             if (!$stub->isOk()) {
                 throw new InvalidOperationException('Generated stub not consistent');
             }
