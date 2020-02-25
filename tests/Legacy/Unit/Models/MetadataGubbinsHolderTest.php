@@ -236,7 +236,7 @@ class MetadataGubbinsHolderTest extends TestCase
         $expected->setRelationName('manyTarget');
         $expected->setForeignField('many_id');
         $expected->setKeyField('many_source');
-        $expected->setThroughFieldChain([ "id", "many_id", "many_source", "id"]);
+        $expected->setThroughFieldChain([ 'id', 'many_id', 'many_source', 'id']);
         $expected->setBaseType(TestMonomorphicManyTarget::class);
         $expected->setTargType(TestMonomorphicManySource::class);
         $expected->setMultiplicity(AssociationStubRelationType::MANY());
@@ -384,7 +384,7 @@ class MetadataGubbinsHolderTest extends TestCase
         $expected->setBaseType(TestMorphManyToManyTarget::class);
         $expected->setTargType(null);
         $expected->setMultiplicity(AssociationStubRelationType::MANY());
-        $expected->setThroughFieldChain(["id", "target_id", "source_id", "id"]);
+        $expected->setThroughFieldChain(['id', 'target_id', 'source_id', 'id']);
 
         $result = $foo->getRelationsByRelationName(TestMorphManyToManySource::class, 'manySource');
         $this->assertEquals(1, count($result));
