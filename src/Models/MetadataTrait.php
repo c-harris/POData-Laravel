@@ -360,7 +360,7 @@ trait MetadataTrait
             $gubbins->setFields($entityFields);
         }
 
-        $rawRels = $this->getRelationships(true);
+        $rawRels = $this->getRelationships();
         $stubs = [];
         foreach ($rawRels as $propertyName) {
             if (in_array(strtolower($propertyName), $lowerNames)) {
