@@ -29,7 +29,7 @@ trait MetadataRelationsTrait
      */
     public function getRelationships()
     {
-            return  $this->getRelationshipsFromMethods();
+        return  $this->getRelationshipsFromMethods();
     }
 
     private $hasUnknownPolymorphic = false;
@@ -137,9 +137,9 @@ trait MetadataRelationsTrait
                 ) {
                     continue;
                 }
-                if(in_array($relation, ['morphedByMany','morphTo'] )){
+                if (in_array($relation, ['morphedByMany','morphTo'])) {
                     $this->hasUnknownPolymorphic = true;
-                }elseif(in_array($relation, ['morphOne','morphMany','morphToMany'])){
+                } elseif (in_array($relation, ['morphOne','morphMany','morphToMany'])) {
                     $this->hasKnownPolymorphic = true;
                 }
                 $relationships[]= $method;
