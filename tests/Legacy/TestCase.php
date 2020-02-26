@@ -110,13 +110,14 @@ class TestCase extends BaseTestCase
 
         //Schema::swap($builder);
     }
-    protected static function resetModel($model){
-          $reset = function(){
-              self::$tableData = [];
-              self::$tableColumnsDoctrine = [];
-              self::$tableColumns = [];
-          };
-          return call_user_func($reset->bindTo($model, get_class($model)));
+    protected static function resetModel($model)
+    {
+        $reset = function () {
+            self::$tableData = [];
+            self::$tableColumnsDoctrine = [];
+            self::$tableColumns = [];
+        };
+        return call_user_func($reset->bindTo($model, get_class($model)));
     }
     public function tearDown() : void
     {
