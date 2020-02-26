@@ -18,26 +18,4 @@ class ObjectMapTest extends TestCase
 {
     //use DatabaseMigrations;
 
-    public function testReset()
-    {
-        $foo = new Map();
-
-        $mockEntity = m::mock(EntityGubbins::class);
-        $mockEntity->shouldReceive('getClassName')->andReturn('name');
-        $mockEntity->shouldReceive('addAssociation')->andReturnNull();
-
-        $foo->addEntity($mockEntity);
-        $this->assertEquals(1, count($foo->getEntities()));
-
-        $assoc = m::mock(AssociationMonomorphic::class);
-        $assoc->shouldReceive('getFirst->getBaseType')->andReturn('name');
-        $assoc->shouldReceive('getLast->getBaseType')->andReturn('name');
-
-        $foo->addAssociation($assoc);
-        $this->assertEquals(1, count($foo->getAssociations()));
-
-        $foo->reset();
-        $this->assertEquals(0, count($foo->getEntities()));
-        $this->assertEquals(0, count($foo->getAssociations()));
-    }
 }
