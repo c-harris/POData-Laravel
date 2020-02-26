@@ -19,11 +19,11 @@ use POData\Common\InvalidOperationException;
 abstract class AssociationStubFactory
 {
     /**
-     * @param Model $parent
-     * @param string $name
-     * @param Relation $relation
-     * @return AssociationStubBase
+     * @param  Model                     $parent
+     * @param  string                    $name
+     * @param  Relation                  $relation
      * @throws InvalidOperationException
+     * @return AssociationStubBase
      */
     public static function associationStubFromRelation(Model $parent, string $name): AssociationStubBase
     {
@@ -57,9 +57,9 @@ abstract class AssociationStubFactory
     }
 
     /**
-     * @param  string              $name
-     * @param  Relation            $relation
-     * @param  string              $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubMonomorphic
      */
     protected static function handleBelongsTo(string $name, Relation $relation, $cacheKey = 'BelongsTo'): AssociationStubMonomorphic
@@ -76,9 +76,9 @@ abstract class AssociationStubFactory
     }
 
     /**
-     * @param  string              $name
-     * @param  Relation            $relation
-     * @param  string              $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubPolymorphic
      */
     protected static function handleMorphTo(string $name, Relation $relation, $cacheKey = 'MorphTo'): AssociationStubPolymorphic
@@ -97,9 +97,9 @@ abstract class AssociationStubFactory
 
 
     /**
-     * @param  string              $name
-     * @param  Relation            $relation
-     * @param  string              $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubMonomorphic
      */
     protected static function handleBelongsToMany(string $name, Relation $relation, $cacheKey = 'BelongsToMany'): AssociationStubMonomorphic
@@ -115,9 +115,9 @@ abstract class AssociationStubFactory
         return $stub;
     }
     /**
-     * @param  string              $name
-     * @param  Relation            $relation
-     * @param  string              $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubMonomorphic
      */
     protected static function handleHasManyThrough(string $name, Relation $relation, $cacheKey = 'HasManyThrough'): AssociationStubMonomorphic
@@ -134,16 +134,16 @@ abstract class AssociationStubFactory
     }
 
     /**
-     * @param  string              $name
-     * @param  Relation            $relation
-     * @param  string              $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubPolymorphic
      */
     protected static function handleMorphToMany(string $name, Relation $relation, $cacheKey = 'MorphToMany'): AssociationStubBase
     {
         //return self::handleBelongsToMany($name,$relation);
         //TODO: investigate if this could be treated as a BelongsToMany Or more importantly a Monomorphic as we know both sides
-        $inverse = self::getKeyChain($relation, "inverse")[0];
+        $inverse = self::getKeyChain($relation, 'inverse')[0];
         $stub = new AssociationStubPolymorphic();
         $keyChain = self::getKeyChain($relation, $cacheKey);
         $stub->setRelationName($name);
@@ -157,9 +157,9 @@ abstract class AssociationStubFactory
     }
 
     /**
-     * @param string $name
-     * @param Relation $relation
-     * @param string $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubMonomorphic
      */
     protected static function handleHasOne(string $name, Relation $relation, $cacheKey = 'HasOneOrMany'): AssociationStubMonomorphic
@@ -176,9 +176,9 @@ abstract class AssociationStubFactory
     }
 
     /**
-     * @param string $name
-     * @param Relation $relation
-     * @param string $cacheKey
+     * @param  string                     $name
+     * @param  Relation                   $relation
+     * @param  string                     $cacheKey
      * @return AssociationStubMonomorphic
      */
     protected static function handleHasMany(string $name, Relation $relation, $cacheKey = 'HasOneOrMany'): AssociationStubMonomorphic
@@ -235,8 +235,8 @@ abstract class AssociationStubFactory
     }
 
     /**
-     * @param Relation $relation
-     * @param string $cacheKey
+     * @param  Relation $relation
+     * @param  string   $cacheKey
      * @return array
      */
     private static function getKeyChain(Relation $relation, string $cacheKey) : array
