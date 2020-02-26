@@ -41,7 +41,7 @@ class RelationTestDummyModel extends Model
 
 
     /**
-     * @param Relation $rel
+     * @param  Relation $rel
      * @return array
      */
     protected function relateMethods(Relation $rel)
