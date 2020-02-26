@@ -32,6 +32,6 @@ trait MetadataRelationsTrait
      */
     public function getRelationships()
     {
-        return static::$relationNames =  self::$relationNames ?? ModelReflectionHelper::getRelationshipsFromMethods(/** @scrutinizer ignore-type */$this);
+        return self::$relationNames =  self::$relationNames ?? ModelReflectionHelper::getRelationshipsFromMethods(/** @scrutinizer ignore-type */$this);
     }
 }
