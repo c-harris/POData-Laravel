@@ -33,7 +33,6 @@ abstract class AssociationStubFactory
         $stub = self::{'handle' . $handler}($name, $relation);
         $stub->setBaseType(get_class($parent));
         return $stub;
-
     }
 
     private static function getHandlerMethod(Relation $relation):string
