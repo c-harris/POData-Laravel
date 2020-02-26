@@ -111,8 +111,9 @@ class TestCase extends BaseTestCase
         //Schema::swap($builder);
     }
 
-    protected static function resetMetadataProvider($provider){
-        $reset = function() {
+    protected static function resetMetadataProvider($provider)
+    {
+        $reset = function () {
             self::$isBooted = false;
             self::$afterExtract = null;
             self::$afterUnify = null;
@@ -122,21 +123,23 @@ class TestCase extends BaseTestCase
         return call_user_func($reset->bindTo($provider, get_class($provider)));
     }
 
-    protected static function resetModelSerialiser($serialiser){
-        $reset = function() {
+    protected static function resetModelSerialiser($serialiser)
+    {
+        $reset = function () {
             self::$mutatorCache = [];
             self::$metadataCache = [];
         };
         return call_user_func($reset->bindTo($serialiser, get_class($serialiser)));
     }
 
-    protected static function resetModel($model){
-          $reset = function(){
-              self::$tableData = [];
-              self::$tableColumnsDoctrine = [];
-              self::$tableColumns = [];
-          };
-          return call_user_func($reset->bindTo($model, get_class($model)));
+    protected static function resetModel($model)
+    {
+        $reset = function () {
+            self::$tableData = [];
+            self::$tableColumnsDoctrine = [];
+            self::$tableColumns = [];
+        };
+        return call_user_func($reset->bindTo($model, get_class($model)));
     }
     public function tearDown() : void
     {
