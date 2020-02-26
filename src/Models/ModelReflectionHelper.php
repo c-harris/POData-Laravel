@@ -61,7 +61,7 @@ abstract class ModelReflectionHelper
             get_class_methods(MetadataTrait::class)
         );
     }
-    
+
     /**
      * @param Model $model
      * @return array|string[]

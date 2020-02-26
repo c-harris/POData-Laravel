@@ -27,6 +27,7 @@ class AssociationStubFactoryTest extends TestCase
      * @param $thatField
      * @param $throughField
      * @param $throughChain
+     * @throws \POData\Common\InvalidOperationException
      */
     public function testAssociationStubFactory($relationName, $from, $to, $thisField, $thatField, $throughChain)
     {

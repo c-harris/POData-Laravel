@@ -307,7 +307,8 @@ class MetadataTraitTest extends TestCase
      * @param $relation
      * @throws \ReflectionException
      */
-    public function testGetRelationshipsFromMethods($model, $relation){
+    public function testGetRelationshipsFromMethods($model, $relation)
+    {
         $foo = new $model();
         $result = ModelReflectionHelper::getRelationshipsFromMethods($foo);
         $message = sprintf('%s relation not found on %s',$relation,$model);
