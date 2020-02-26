@@ -3,7 +3,6 @@
 
 namespace Tests\Northwind\AlgoWeb\PODataLaravel\Models;
 
-
 class Photo
 {
     use \AlgoWeb\PODataLaravel\Models\MetadataTrait;
