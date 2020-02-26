@@ -73,5 +73,4 @@ class TestCase extends BaseTestCase
         };
         return call_user_func($reset->bindTo($provider, get_class($provider)));
     }
-
 }
