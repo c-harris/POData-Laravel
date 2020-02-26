@@ -19,7 +19,10 @@ use POData\Common\InvalidOperationException;
 
 trait MetadataRelationsTrait
 {
-
+    /**
+     * @var array|string[]|null a cache for the relationship names
+     */
+    private static $relationNames = null;
     /**
      * Get model's relationships.
      *
@@ -29,7 +32,7 @@ trait MetadataRelationsTrait
      */
     public function getRelationships()
     {
-        return  $this->getRelationshipsFromMethods();
+        return static::$relationNames =  static::$relationNames ?? $this->getRelationshipsFromMethods();
     }
 
     /**
