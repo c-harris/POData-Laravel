@@ -62,4 +62,15 @@ class TestCase extends BaseTestCase
             $this->assertContains($expected, $result->response->getOriginalContent());
         }
     }
+    protected static function resetMetadataProvider($provider){
+        $reset = function() {
+            self::$isBooted = false;
+            self::$afterExtract = null;
+            self::$afterUnify = null;
+            self::$afterVerify = null;
+            self::$afterImplement = null;
+        };
+        return call_user_func($reset->bindTo($provider, get_class($provider)));
+    }
+
 }
