@@ -15,7 +15,7 @@ class AssociationStubMonomorphic extends AssociationStubBase
             return false;
         }
 
-        if($this->getThroughFieldChain() !== array_reverse($otherStub->getThroughFieldChain())){
+        if ($this->getThroughFieldChain() !== array_reverse($otherStub->getThroughFieldChain())) {
             return false;
         }
 
