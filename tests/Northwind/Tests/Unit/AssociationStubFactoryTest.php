@@ -34,7 +34,8 @@ class AssociationStubFactoryTest extends TestCase
         $this->assertTrue(class_exists($from), '$to paramater must be a class');
         $this->assertInstanceOf(Model::class, new $from(), sprintf('$from Should Be instance of %s', Model::class));
         (is_null($to)) ?: $this->assertInstanceOf(Model::class, new $to(), sprintf('$to Should Be instance of %s', Model::class));
-        $this->assertTrue(method_exists($from, $relationName), sprintf('%s is not a method on %s', $relationName, $from));        $relationType = get_class((new $from())->{$relationName}());
+        $this->assertTrue(method_exists($from, $relationName), sprintf('%s is not a method on %s', $relationName, $from));
+        $relationType = get_class((new $from())->{$relationName}());
         $relationXonY = sprintf('Relation: %s  ' . "\r\n" .
             'On: %s ' . "\r\n" .
             'of Type: %s'  . "\r\n" .
