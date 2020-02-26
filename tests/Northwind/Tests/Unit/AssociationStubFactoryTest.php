@@ -12,6 +12,7 @@ use Tests\Northwind\AlgoWeb\PODataLaravel\Models\InventoryTransaction;
 use Tests\Northwind\AlgoWeb\PODataLaravel\Models\InventoryTransactionType;
 use Tests\Northwind\AlgoWeb\PODataLaravel\Models\Invoice;
 use Tests\Northwind\AlgoWeb\PODataLaravel\Models\Order;
+use Tests\Northwind\AlgoWeb\PODataLaravel\Models\Photo;
 use Tests\Northwind\AlgoWeb\PODataLaravel\Models\Privilege;
 use Tests\Northwind\AlgoWeb\PODataLaravel\TestCase;
 
@@ -32,7 +33,7 @@ class AssociationStubFactoryTest extends TestCase
         $this->assertTrue(class_exists($from), '$from paramater must be a class');
         $this->assertTrue(class_exists($from), '$to paramater must be a class');
         $this->assertInstanceOf(Model::class, new $from(), sprintf('$from Should Be instance of %s', Model::class));
-        $this->assertInstanceOf(Model::class, new $to(), sprintf('$to Should Be instance of %s', Model::class));
+        (is_null($to)) ?: $this->assertInstanceOf(Model::class, new $to(), sprintf('$to Should Be instance of %s', Model::class));
         $this->assertTrue(method_exists($from, $relationName), sprintf('%s is not a method on %s',$relationName,$from));
         $relationType = get_class((new $from())->{$relationName}());
         $relationXonY = sprintf('Relation: %s  ' . "\r\n" .
@@ -59,6 +60,9 @@ class AssociationStubFactoryTest extends TestCase
             ['invoice', Order::class, Invoice::class, 'id', 'order_id',['id', 'order_id']], // Has one
             ['invoices', Customer::class, Invoice::class, 'id', 'order_id', ['id','customer_id','id','order_id']],
             ['customer', Invoice::class, Customer::class, 'order_id', 'id', ['order_id','id','customer_id','id']],
+            //TODO: the morphOneHandler Should do this... but doesnt ['photos', Customer::class, Photo::class, 'id', 'rel_id', ['id', 'rel_type','rel_id']], // Morph One
+            //TODO: the morphManyHandler should do this... but doesnt ['photos', Employee::class, Photo::class, 'id', 'rel_id', ['id', 'rel_type','rel_id']], // Morph Many
+            //TODO: the morphToHandler should do this... but doesnt ['photoOf', Photo::class,null, 'rel_id', null, ['rel_id', 'rel_type', null]]
         ];
     }
 
@@ -90,6 +94,9 @@ class AssociationStubFactoryTest extends TestCase
         return [
             [Customer::class, 'orders', Order::class, 'customer',true],
             [Customer::class, 'orders', Employee::class, 'privileges',false],
+            [Customer::class, 'photos', Photo::class, 'photoOf',true],
+            [Employee::class, 'photos', Photo::class, 'photoOf',true],
+            [Customer::class, 'photos', Order::class, 'customer',false],
         ];
     }
 }
