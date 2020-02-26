@@ -6,6 +6,9 @@ namespace AlgoWeb\PODataLaravel\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Mockery\Mock;
+use ReflectionException;
+use ReflectionMethod;
+use SplFileObject;
 
 abstract class ModelReflectionHelper
 {
@@ -23,14 +26,14 @@ abstract class ModelReflectionHelper
     ];
 
     /**
-     * @param  \ReflectionMethod         $method
+     * @param  ReflectionMethod         $method
      * @return string
      */
-    public static function getCodeForMethod(\ReflectionMethod $method) : string
+    public static function getCodeForMethod(ReflectionMethod $method) : string
     {
         $fileName = $method->getFileName();
 
-        $file = new \SplFileObject($fileName);
+        $file = new SplFileObject($fileName);
         $file->seek($method->getStartLine() - 1);
         $code = '';
         while ($file->key() < $method->getEndLine()) {
@@ -62,7 +65,7 @@ abstract class ModelReflectionHelper
     /**
      * @param Model $model
      * @return array|string[]
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public static function getRelationshipsFromMethods(Model $model): array
     {
@@ -70,7 +73,7 @@ abstract class ModelReflectionHelper
         $methods = self::getModelClassMethods($model);
         foreach ($methods as $method) {
             //Use reflection to inspect the code, based on Illuminate/Support/SerializableClosure.php
-            $reflection = new \ReflectionMethod($model, $method);
+            $reflection = new ReflectionMethod($model, $method);
             $code = self::getCodeForMethod($reflection);
             foreach (static::$relTypes as $relation) {
                 //Resolve the relation's model to a Relation object.
