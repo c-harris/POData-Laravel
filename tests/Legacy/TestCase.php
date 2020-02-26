@@ -134,7 +134,7 @@ class TestCase extends BaseTestCase
 
     protected static function resetModel($model)
     {
-        $reset = function (){
+        $reset = function () {
             self::$tableData = [];
             self::$tableColumnsDoctrine = [];
             self::$tableColumns = [];
