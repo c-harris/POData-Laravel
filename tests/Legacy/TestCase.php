@@ -102,7 +102,7 @@ class TestCase extends BaseTestCase
         App::instance('db', $database);
         // Clear any residual metadata bitz from previous runs
         $foo = new TestModel();
-        $foo->reset();
+        self::resetModel($foo);
 
         $foo = new ModelSerialiser();
         $foo->reset();
@@ -110,7 +110,14 @@ class TestCase extends BaseTestCase
 
         //Schema::swap($builder);
     }
-
+    protected static function resetModel($model){
+          $reset = function(){
+              self::$tableData = [];
+              self::$tableColumnsDoctrine = [];
+              self::$tableColumns = [];
+          };
+          return call_user_func($reset->bindTo($model, get_class($model)));
+    }
     public function tearDown() : void
     {
         //Schema::swap($this->origFacade['schema']);
