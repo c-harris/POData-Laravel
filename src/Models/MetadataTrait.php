@@ -23,7 +23,7 @@ use POData\Common\InvalidOperationException;
 use POData\Providers\Metadata\Type\IType;
 
 /**
- * Trait MetadataTrait
+ * Trait MetadataTrait.
  * @package AlgoWeb\PODataLaravel\Models
  * @mixin Model
  */
