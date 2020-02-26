@@ -311,7 +311,7 @@ class MetadataTraitTest extends TestCase
     {
         $foo = new $model();
         $result = ModelReflectionHelper::getRelationshipsFromMethods($foo);
-        $message = sprintf('%s relation not found on %s',$relation,$model);
+        $message = sprintf('%s relation not found on %s', $relation, $model);
         $this->assertTrue(in_array($relation, $result), $message);
     }
 
