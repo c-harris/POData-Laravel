@@ -81,7 +81,6 @@ trait MetadataRelationsTrait
      */
     protected function getRelationshipsFromMethods()
     {
-
         $relationships = [];
         /** @var Model $model */
         $model = $this;

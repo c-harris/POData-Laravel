@@ -23,7 +23,7 @@ use POData\Common\InvalidOperationException;
 use POData\Providers\Metadata\Type\IType;
 
 /**
- * Trait MetadataTrait
+ * Trait MetadataTrait.
  * @package AlgoWeb\PODataLaravel\Models
  * @mixin Model
  */
@@ -357,7 +357,7 @@ trait MetadataTrait
                 $msg = 'Property names must be unique, without regard to case';
                 throw new \Exception($msg);
             }
-            $stub = AssociationStubFactory::associationStubFromRelation(/** @scrutinizer ignore-type */$this, $propertyName);
+            $stub = AssociationStubFactory::associationStubFromRelation(/* @scrutinizer ignore-type */$this, $propertyName);
             $stubs[$propertyName] = $stub;
         }
         $gubbins->setStubs($stubs);
