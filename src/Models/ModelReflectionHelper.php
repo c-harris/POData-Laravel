@@ -3,12 +3,9 @@
 
 namespace AlgoWeb\PODataLaravel\Models;
 
-
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Mockery\Mock;
-use POData\Common\InvalidOperationException;
 
 abstract class ModelReflectionHelper
 {
