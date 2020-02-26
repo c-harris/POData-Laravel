@@ -17,5 +17,4 @@ use Mockery as m;
 class ObjectMapTest extends TestCase
 {
     //use DatabaseMigrations;
-
 }

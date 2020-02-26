@@ -113,7 +113,7 @@ class TestCase extends BaseTestCase
 
     protected static function resetMetadataProvider($provider)
     {
-        $reset = function() {
+        $reset = function () {
             self::$isBooted = false;
             self::$afterExtract = null;
             self::$afterUnify = null;
@@ -125,7 +125,7 @@ class TestCase extends BaseTestCase
 
     protected static function resetModelSerialiser($serialiser)
     {
-        $reset = function() {
+        $reset = function () {
             self::$mutatorCache = [];
             self::$metadataCache = [];
         };
@@ -134,12 +134,12 @@ class TestCase extends BaseTestCase
 
     protected static function resetModel($model)
     {
-          $reset = function(){
-              self::$tableData = [];
-              self::$tableColumnsDoctrine = [];
-              self::$tableColumns = [];
-          };
-          return call_user_func($reset->bindTo($model, get_class($model)));
+        $reset = function (){
+            self::$tableData = [];
+            self::$tableColumnsDoctrine = [];
+            self::$tableColumns = [];
+        };
+        return call_user_func($reset->bindTo($model, get_class($model)));
     }
     public function tearDown() : void
     {

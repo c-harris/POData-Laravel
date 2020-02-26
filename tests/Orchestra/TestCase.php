@@ -64,7 +64,7 @@ class TestCase extends BaseTestCase
     }
     protected static function resetMetadataProvider($provider)
     {
-        $reset = function() {
+        $reset = function () {
             self::$isBooted = false;
             self::$afterExtract = null;
             self::$afterUnify = null;
