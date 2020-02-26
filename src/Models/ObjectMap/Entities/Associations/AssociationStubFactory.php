@@ -139,10 +139,7 @@ abstract class AssociationStubFactory
     {
         //return self::handleBelongsToMany($name,$relation);
         //TODO: investigate if this could be treated as a BelongsToMany Or more importantly a Monomorphic as we know both sides
-        $inverseGetter = function () {
-            return $this->inverse;
-        };
-        $inverse = call_user_func($inverseGetter->bindTo($relation, MorphToMany::class));
+        $inverse = self::getKeyChain($relation, "inverse")[0];
         $stub = new AssociationStubPolymorphic();
         $keyChain = self::getKeyChain($relation, $cacheKey);
         $stub->setRelationName($name);
@@ -250,7 +247,8 @@ abstract class AssociationStubFactory
                     $carry[] = null;
                     continue;
                 }
-                $segments = explode('.', $this->{$item});
+                //TODO: investigate if this is needed can we use quailifed keys?
+                $segments = explode('.', strval($this->{$item}));
                 $carry[] = end($segments);
             }
             return $carry;
@@ -266,6 +264,7 @@ abstract class AssociationStubFactory
         'MorphToMany' => ['parentKey','foreignPivotKey','morphType', 'relatedPivotKey','relatedKey'],
         'MorphTo' => ['foreignKey', 'morphType', 'ownerKey'],
         'MorphOneOrMany' => ['foreignKey', 'morphType', 'localKey' ],
+        'inverse' => ['inverse'], // TODO: currently used to get inverse, should be removed when morephtomany is fixed
 
     ];
 }
