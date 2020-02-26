@@ -51,12 +51,12 @@ abstract class ModelReflectionHelper
      * @param  Model $model
      * @return array
      */
-    public static function getModelClassMethods(Model $model)
+    public static function getModelClassMethods(Model $model):array
     {
         // TODO: Handle case when Mock::class not present
         return array_diff(
             get_class_methods($model),
-            get_class_methods(\Illuminate\Database\Eloquent\Model::class),
+            get_class_methods(Model::class),
             get_class_methods(Mock::class),
             get_class_methods(MetadataTrait::class)
         );
@@ -67,9 +67,8 @@ abstract class ModelReflectionHelper
      * @return array|string[]
      * @throws \ReflectionException
      */
-    public static function getRelationshipsFromMethods($model)
+    public static function getRelationshipsFromMethods(Model $model): array
     {
-
         $relationships = [];
         $methods = self::getModelClassMethods($model);
         foreach ($methods as $method) {
