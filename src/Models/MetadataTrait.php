@@ -266,14 +266,13 @@ trait MetadataTrait
     }
 
     /**
-     * Supplemental function to retrieve cast array for Laravel versions that do not supply hasCasts.
+     * Used to be supplemental function to retrieve cast array for Laravel versions that do not supply hasCasts.
      *
      * @return array
      */
     public function retrieveCasts()
     {
-        $exists = method_exists($this, 'getCasts');
-        return $exists ? (array)$this->getCasts() : (array)$this->casts;
+        return $this->getCasts();
     }
 
     /**
