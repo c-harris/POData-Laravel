@@ -26,7 +26,7 @@ abstract class ModelReflectionHelper
     ];
 
     /**
-     * @param  ReflectionMethod         $method
+     * @param  ReflectionMethod $method
      * @return string
      */
     public static function getCodeForMethod(ReflectionMethod $method): string
@@ -62,9 +62,9 @@ abstract class ModelReflectionHelper
     }
 
     /**
-     * @param Model $model
-     * @return string[]
+     * @param  Model               $model
      * @throws ReflectionException
+     * @return string[]
      */
     public static function getRelationshipsFromMethods(Model $model): array
     {

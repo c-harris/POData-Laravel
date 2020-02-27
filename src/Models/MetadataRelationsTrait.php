@@ -28,6 +28,6 @@ trait MetadataRelationsTrait
     public function getRelationships()
     {
         return self::$relationNames = self::$relationNames ??
-                                      ModelReflectionHelper::getRelationshipsFromMethods(/** @scrutinizer ignore-type */$this);
+                                      ModelReflectionHelper::getRelationshipsFromMethods(/* @scrutinizer ignore-type */$this);
     }
 }
