@@ -37,7 +37,7 @@ class AssociationStubFactoryTest extends TestCase
         $this->assertTrue(class_exists($from), '$from parameter must be a class');
         $this->assertTrue(class_exists($from), '$to parameter must be a class');
         $this->assertInstanceOf(Model::class, new $from(), sprintf('$from should Be instance of %s', Model::class));
-        (is_null($to)) ?: $this->assertInstanceOf(Model::class, new $to(), sprintf('$to should Be instance of %s', Model::class));
+        (null === $to) ?: $this->assertInstanceOf(Model::class, new $to(), sprintf('$to should Be instance of %s', Model::class));
         $this->assertTrue(
             method_exists($from, $relationName),
             sprintf('%s is not a method on %s', $relationName, $from)
@@ -56,10 +56,10 @@ class AssociationStubFactoryTest extends TestCase
         $this->assertEquals(
             $from,
             $stub->getBaseType(),
-            "the base type of a relationship should be the model on which the relation lives"
+            'the base type of a relationship should be the model on which the relation lives'
         );
         $this->assertEquals($to, $stub->getTargType(), sprintf($relationXonY . ' have a Target Type of %s', $to));
-        $this->assertEquals($relationName, $stub->getRelationName(), sprintf($relationXonY . " be named %s", $relationName));
+        $this->assertEquals($relationName, $stub->getRelationName(), sprintf($relationXonY . ' be named %s', $relationName));
         $this->assertEquals($thisField, $stub->getKeyField(), sprintf($relationXonY . ' have a key field on %s side of the relation', $from));
         $this->assertEquals($thatField, $stub->getForeignField(), sprintf($relationXonY . ' have a foreign field on %s side of the relation', $to));
         $this->assertEquals($throughChain, $stub->getThroughFieldChain(), sprintf($relationXonY . 'should have through chain[' . implode(', ', $throughChain) . ']'));
