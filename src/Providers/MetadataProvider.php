@@ -29,8 +29,8 @@ class MetadataProvider extends MetadataBaseProvider
     protected $multConstraints = ['0..1' => ['1'], '1' => ['0..1', '*'], '*' => ['1', '*']];
     protected static $metaNAMESPACE = 'Data';
     protected static $isBooted = false;
-    const POLYMORPHIC = 'polyMorphicPlaceholder';
-    const POLYMORPHIC_PLURAL = 'polyMorphicPlaceholders';
+    public const POLYMORPHIC = 'polyMorphicPlaceholder';
+    public const POLYMORPHIC_PLURAL = 'polyMorphicPlaceholders';
 
     /**
      * @var Map The completed object map set at post Implement;
@@ -101,7 +101,7 @@ class MetadataProvider extends MetadataBaseProvider
         return $objectMap;
     }
 
-    private function verify(Map $objectModel)
+    private function verify(Map $objectModel): void
     {
         $objectModel->isOK();
         $this->handleCustomFunction($objectModel, self::$afterVerify);
@@ -112,11 +112,11 @@ class MetadataProvider extends MetadataBaseProvider
      * @throws InvalidOperationException
      * @throws \ReflectionException
      */
-    private function implement(Map $objectModel)
+    private function implement(Map $objectModel): void
     {
         /** @var SimpleMetadataProvider $meta */
         $meta = App::make('metadata');
-        $namespace = $meta->getContainerNamespace().'.';
+        $namespace = $meta->getContainerNamespace() . '.';
 
         $entities = $objectModel->getEntities();
         foreach ($entities as $entity) {
@@ -131,13 +131,13 @@ class MetadataProvider extends MetadataBaseProvider
             $entity->setOdataResourceType($entityType);
             $this->implementProperties($entity);
             $meta->addResourceSet($pluralName, $entityType);
-            $meta->oDataEntityMap[$className] = $meta->oDataEntityMap[$namespace.$entityName];
+            $meta->oDataEntityMap[$className] = $meta->oDataEntityMap[$namespace . $entityName];
         }
         $metaCount = count($meta->oDataEntityMap);
         $entityCount = count($entities);
         $expected = 2 * $entityCount;
         if ($metaCount != $expected) {
-            $msg = 'Expected ' . $expected . ' items, actually got '.$metaCount;
+            $msg = 'Expected ' . $expected . ' items, actually got ' . $metaCount;
             throw new InvalidOperationException($msg);
         }
 
@@ -160,7 +160,7 @@ class MetadataProvider extends MetadataBaseProvider
      * @throws InvalidOperationException
      * @throws \ReflectionException
      */
-    private function implementAssociationsMonomorphic(Map $objectModel, AssociationMonomorphic $associationUnderHammer)
+    private function implementAssociationsMonomorphic(Map $objectModel, AssociationMonomorphic $associationUnderHammer): void
     {
         /** @var SimpleMetadataProvider $meta */
         $meta = App::make('metadata');
@@ -208,7 +208,7 @@ class MetadataProvider extends MetadataBaseProvider
      * @throws InvalidOperationException
      * @throws \ReflectionException
      */
-    private function implementProperties(EntityGubbins $unifiedEntity)
+    private function implementProperties(EntityGubbins $unifiedEntity): void
     {
         /** @var SimpleMetadataProvider $meta */
         $meta = App::make('metadata');

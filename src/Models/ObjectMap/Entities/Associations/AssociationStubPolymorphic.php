@@ -22,7 +22,7 @@ class AssociationStubPolymorphic extends AssociationStubBase
     /**
      * @param string $morphType
      */
-    public function setMorphType($morphType)
+    public function setMorphType($morphType): void
     {
         $this->morphType = $morphType;
     }
@@ -60,7 +60,7 @@ class AssociationStubPolymorphic extends AssociationStubBase
      */
     public function isKnownSide()
     {
-        if (!($this->isOk())) {
+        if (!$this->isOk()) {
             throw new InvalidOperationException('Polymorphic stub not OK so known-side determination is meaningless');
         }
         return null === $this->targType;

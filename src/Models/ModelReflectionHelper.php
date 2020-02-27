@@ -6,7 +6,6 @@ namespace AlgoWeb\PODataLaravel\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Mockery\Mock;
-use POData\Common\InvalidOperationException;
 use ReflectionException;
 use ReflectionMethod;
 use SplFileObject;
@@ -44,8 +43,7 @@ abstract class ModelReflectionHelper
 
         $code = trim(preg_replace('/\s\s+/', '', $code));
         $begin = strpos($code, 'function(');
-        $code = substr($code, $begin, strrpos($code, '}') - $begin + 1);
-        return $code;
+        return substr($code, $begin, strrpos($code, '}') - $begin + 1);
     }
 
     /**
@@ -65,7 +63,7 @@ abstract class ModelReflectionHelper
 
     /**
      * @param Model $model
-     * @return array|string[]
+     * @return string[]
      * @throws ReflectionException
      */
     public static function getRelationshipsFromMethods(Model $model): array
@@ -85,7 +83,7 @@ abstract class ModelReflectionHelper
                 ) {
                     continue;
                 }
-                $relationships[]= $method;
+                $relationships[] = $method;
             }
         }
         return $relationships;

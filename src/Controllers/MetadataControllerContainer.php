@@ -9,7 +9,7 @@ class MetadataControllerContainer
     /**
      * @param array $meta
      */
-    public function setMetadata(array $meta)
+    public function setMetadata(array $meta): void
     {
         $this->metadata = $meta;
     }

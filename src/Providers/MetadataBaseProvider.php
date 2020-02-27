@@ -26,7 +26,7 @@ abstract class MetadataBaseProvider extends ServiceProvider
      * @param string    $key
      * @param $meta
      */
-    protected function handlePostBoot(bool $isCaching, $hasCache, string $key, $meta)
+    protected function handlePostBoot(bool $isCaching, $hasCache, string $key, $meta): void
     {
         if (!$isCaching) {
             Cache::forget($key);
@@ -62,11 +62,11 @@ abstract class MetadataBaseProvider extends ServiceProvider
      * @param $classMap
      * @throws \Exception
      */
-    protected function checkClassMap($classMap)
+    protected function checkClassMap($classMap): void
     {
         $class = __CLASS__;
         if (!isset($classMap[$class])) {
-            throw new \Exception(sprintf('%s was not found in autoload class map, this usually indicates you '.
+            throw new \Exception(sprintf('%s was not found in autoload class map, this usually indicates you ' .
             'need to dump an optimised autoloader (`composer dump-autoload -o`)', $class));
         }
     }

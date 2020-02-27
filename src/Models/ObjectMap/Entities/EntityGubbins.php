@@ -56,7 +56,7 @@ class EntityGubbins
     /**
      * @param ResourceEntityType $odataType
      */
-    public function setOdataResourceType(ResourceEntityType $odataType)
+    public function setOdataResourceType(ResourceEntityType $odataType): void
     {
         if ($odataType->isAbstract()) {
             $msg = 'OData resource entity type must be concrete';
@@ -76,7 +76,7 @@ class EntityGubbins
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -92,7 +92,7 @@ class EntityGubbins
     /**
      * @param string $className
      */
-    public function setClassName($className)
+    public function setClassName($className): void
     {
         $this->className = $className;
     }
@@ -117,16 +117,16 @@ class EntityGubbins
      * @param  EntityField[] $fields
      * @throws \Exception
      */
-    public function setFields(array $fields)
+    public function setFields(array $fields): void
     {
         if (0 == count($fields)) {
-            $msg = 'Fields array must not be empty for '.$this->getClassName();
+            $msg = 'Fields array must not be empty for ' . $this->getClassName();
             throw new \Exception($msg);
         }
         $keys = [];
         foreach ($fields as $propName => $field) {
             if (!$field instanceof EntityField) {
-                $msg = 'Fields array must only have EntityField objects for '.$this->getClassName();
+                $msg = 'Fields array must only have EntityField objects for ' . $this->getClassName();
                 throw new \Exception($msg);
             }
             if ($field->getIsKeyField()) {
@@ -134,7 +134,7 @@ class EntityGubbins
             }
         }
         if (0 == count($keys)) {
-            $msg = 'No key field supplied in fields array for '.$this->getClassName();
+            $msg = 'No key field supplied in fields array for ' . $this->getClassName();
             throw new \Exception($msg);
         }
         $this->fields = $fields;
@@ -153,7 +153,7 @@ class EntityGubbins
      * @param  AssociationStubBase[] $stubs
      * @throws \Exception
      */
-    public function setStubs(array $stubs)
+    public function setStubs(array $stubs): void
     {
         foreach ($stubs as $field) {
             if (!$field instanceof AssociationStubBase) {
@@ -169,7 +169,7 @@ class EntityGubbins
      * @param  bool                      $isFirst
      * @throws InvalidOperationException
      */
-    public function addAssociation(Association $association, $isFirst = true)
+    public function addAssociation(Association $association, $isFirst = true): void
     {
         if ($association instanceof AssociationMonomorphic) {
             $stub = $isFirst ? $association->getFirst() : $association->getLast();

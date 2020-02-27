@@ -1,4 +1,5 @@
 <?php
+
 namespace AlgoWeb\PODataLaravel\Models\ObjectMap;
 
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\Association;
@@ -20,7 +21,7 @@ class Map
     /**
      * @param EntityGubbins $entity
      */
-    public function addEntity(EntityGubbins $entity)
+    public function addEntity(EntityGubbins $entity): void
     {
         $this->entities[$entity->getClassName()] = $entity;
     }
@@ -41,7 +42,7 @@ class Map
     /**
      * @param EntityGubbins[] $entities
      */
-    public function setEntities(array $entities)
+    public function setEntities(array $entities): void
     {
         $this->entities = [];
         foreach ($entities as $entity) {
@@ -58,7 +59,7 @@ class Map
      * @param  Association[]                            $associations
      * @throws \POData\Common\InvalidOperationException
      */
-    public function setAssociations(array $associations)
+    public function setAssociations(array $associations): void
     {
         foreach ($associations as $association) {
             $this->addAssociation($association);
@@ -69,7 +70,7 @@ class Map
      * @param  Association                              $association
      * @throws \POData\Common\InvalidOperationException
      */
-    public function addAssociation(Association $association)
+    public function addAssociation(Association $association): void
     {
         if ($association instanceof AssociationMonomorphic) {
             $this->addAssociationMonomorphic($association);
@@ -104,7 +105,7 @@ class Map
      * @param  AssociationMonomorphic                   $association
      * @throws \POData\Common\InvalidOperationException
      */
-    private function addAssociationMonomorphic(AssociationMonomorphic $association)
+    private function addAssociationMonomorphic(AssociationMonomorphic $association): void
     {
         $firstClass = $this->entities[$association->getFirst()->getBaseType()];
         $secondClass = $this->entities[$association->getLast()->getBaseType()];

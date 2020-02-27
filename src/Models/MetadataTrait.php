@@ -1,24 +1,14 @@
 <?php
+
 namespace AlgoWeb\PODataLaravel\Models;
 
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationStubFactory;
-use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationStubMonomorphic;
-use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationStubPolymorphic;
-use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationStubRelationType;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityField;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityFieldPrimitiveType;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityFieldType;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityGubbins;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
-use Mockery\Mock;
 use POData\Common\InvalidOperationException;
 use POData\Providers\Metadata\Type\IType;
 
@@ -94,7 +84,7 @@ trait MetadataTrait
             $type = $rawType->getName();
             $default = $this->$column;
             $tableData[$column] = ['type' => $type,
-                'nullable' => !($rawColumn->getNotNull()),
+                'nullable' => !$rawColumn->getNotNull(),
                 'fillable' => in_array($column, $this->getFillable()),
                 'default' => $default
             ];
@@ -152,10 +142,9 @@ trait MetadataTrait
 
         if (!isset($endpoint)) {
             $bitter = get_class($this);
-            $name = substr($bitter, strrpos($bitter, '\\')+1);
-            return ($name);
+            return substr($bitter, strrpos($bitter, '\\') + 1);
         }
-        return ($endpoint);
+        return $endpoint;
     }
 
     protected function getAllAttributes()
@@ -292,7 +281,7 @@ trait MetadataTrait
      *
      * @param array $relations
      */
-    public function setEagerLoad(array $relations)
+    public function setEagerLoad(array $relations): void
     {
         $this->loadEagerRelations = array_map('strval', $relations);
     }
@@ -333,7 +322,7 @@ trait MetadataTrait
             $nuField->setPrimitiveType(new EntityFieldPrimitiveType($field['type']));
             $entityFields[$name] = $nuField;
         }
-        $isEmpty = (0 === count($entityFields));
+        $isEmpty = 0 === count($entityFields);
         if (!($isEmpty && $this->isRunningInArtisan())) {
             $gubbins->setFields($entityFields);
         }

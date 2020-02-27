@@ -2,11 +2,7 @@
 
 namespace AlgoWeb\PODataLaravel\Query;
 
-use AlgoWeb\PODataLaravel\Auth\NullAuthProvider;
-use AlgoWeb\PODataLaravel\Controllers\MetadataControllerContainer;
-use AlgoWeb\PODataLaravel\Enums\ActionVerb;
 use AlgoWeb\PODataLaravel\Interfaces\AuthInterface;
-use AlgoWeb\PODataLaravel\Providers\MetadataProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
@@ -22,7 +18,6 @@ use POData\UriProcessor\QueryProcessor\ExpressionParser\FilterInfo;
 use POData\UriProcessor\QueryProcessor\OrderByParser\InternalOrderByInfo;
 use POData\UriProcessor\QueryProcessor\SkipTokenParser\SkipTokenInfo;
 use POData\UriProcessor\ResourcePathProcessor\SegmentParser\KeyDescriptor;
-use Symfony\Component\Process\Exception\InvalidArgumentException;
 
 class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
 {
@@ -35,7 +30,7 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
     protected static $touchList = [];
     protected static $inBatch;
 
-    public function __construct(AuthInterface $auth = null)
+    public function __construct(?AuthInterface $auth = null)
     {
         parent::__construct($auth);
         /* MySQLExpressionProvider();*/
@@ -132,7 +127,7 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
         $top = null,
         $skip = null,
         $skipToken = null,
-        array $eagerLoad = null,
+        ?array $eagerLoad = null,
         $sourceEntityInstance = null
     ) {
         /** @var Model|Relation|null $source */
@@ -163,8 +158,8 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
      */
     public function getResourceFromResourceSet(
         ResourceSet $resourceSet,
-        KeyDescriptor $keyDescriptor = null,
-        array $eagerLoad = null
+        ?KeyDescriptor $keyDescriptor = null,
+        ?array $eagerLoad = null
     ) {
         return $this->getReader()->getResourceFromResourceSet($resourceSet, $keyDescriptor, $eagerLoad);
     }
@@ -194,7 +189,7 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
         $sourceEntityInstance,
         ResourceSet $targetResourceSet,
         ResourceProperty $targetProperty,
-        FilterInfo $filter = null,
+        ?FilterInfo $filter = null,
         $orderBy = null,
         $top = null,
         $skip = null,
@@ -269,13 +264,12 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
         /** @var Model $source */
         $source = $this->unpackSourceEntity($sourceEntityInstance);
 
-        $result = $this->getReader()->getRelatedResourceReference(
+        return $this->getReader()->getRelatedResourceReference(
             $sourceResourceSet,
             $source,
             $targetResourceSet,
             $targetProperty
         );
-        return $result;
     }
 
     /**
@@ -465,7 +459,7 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
      * Start database transaction.
      * @param bool $isBulk
      */
-    public function startTransaction($isBulk = false)
+    public function startTransaction($isBulk = false): void
     {
         self::$touchList = [];
         self::$inBatch = true === $isBulk;
@@ -475,7 +469,7 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
     /**
      * Commit database transaction.
      */
-    public function commitTransaction()
+    public function commitTransaction(): void
     {
         // fire model save again, to give Laravel app final chance to finalise anything that needs finalising after
         // batch processing
@@ -491,14 +485,14 @@ class LaravelQuery extends LaravelBaseQuery implements IQueryProvider
     /**
      * Abort database transaction.
      */
-    public function rollBackTransaction()
+    public function rollBackTransaction(): void
     {
         DB::rollBack();
         self::$touchList = [];
         self::$inBatch = false;
     }
 
-    public static function queueModel(Model &$model)
+    public static function queueModel(Model &$model): void
     {
         // if we're not processing a batch, don't queue anything
         if (!self::$inBatch) {

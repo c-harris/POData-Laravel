@@ -30,7 +30,7 @@ trait SerialiseNextPageLinksTrait
      * @throws InvalidOperationException
      * @throws ODataException
      */
-    protected function buildNextPageLink(QueryResult $entryObjects, $odata)
+    protected function buildNextPageLink(QueryResult $entryObjects, $odata): void
     {
         $stackSegment = $this->getRequest()->getTargetResourceSetWrapper()->getName();
         /** @var array $res */
@@ -97,8 +97,8 @@ trait SerialiseNextPageLinksTrait
         if (empty($skipToken)) {
             throw new InvalidOperationException('!is_null($skipToken)');
         }
-        $token = (1 < $numSegments) ? '$skiptoken=' : '$skip=';
-        $skipToken = (1 < $numSegments) ? $skipToken : intval(trim($skipToken, '\''));
+        $token = 1 < $numSegments ? '$skiptoken=' : '$skip=';
+        $skipToken = 1 < $numSegments ? $skipToken : intval(trim($skipToken, '\''));
         $skipToken = '?' . $queryParameterString . $token . $skipToken;
 
         return $skipToken;
@@ -127,7 +127,7 @@ trait SerialiseNextPageLinksTrait
             $value = $this->getService()->getHost()->getQueryStringItem($queryOption);
             if (null !== $value) {
                 if (null !== $queryParameterString) {
-                    $queryParameterString = /* @scrutinizer ignore-type */$queryParameterString . '&';
+                    $queryParameterString .= '&';
                 }
 
                 $queryParameterString .= $queryOption . '=' . $value;
@@ -136,7 +136,7 @@ trait SerialiseNextPageLinksTrait
 
         $topCountValue = $this->getRequest()->getTopOptionCount();
         if (null !== $topCountValue) {
-            $remainingCount = $topCountValue-$this->getRequest()->getTopCount();
+            $remainingCount = $topCountValue - $this->getRequest()->getTopCount();
             if (0 < $remainingCount) {
                 if (null !== $queryParameterString) {
                     $queryParameterString .= '&';

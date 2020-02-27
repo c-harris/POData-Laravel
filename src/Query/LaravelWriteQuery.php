@@ -33,7 +33,7 @@ class LaravelWriteQuery extends LaravelBaseQuery
             $varType = isset($spec['type']) ? $spec['type'] : null;
             $varName = $spec['name'];
             if (null == $varType) {
-                $parms[] = ('id' == $varName) ? $sourceEntityInstance->getKey() : $sourceEntityInstance->$varName;
+                $parms[] = 'id' == $varName ? $sourceEntityInstance->getKey() : $sourceEntityInstance->$varName;
                 continue;
             }
             // TODO: Give this smarts and actively pick up instantiation details
@@ -89,7 +89,7 @@ class LaravelWriteQuery extends LaravelBaseQuery
         ResourceSet $sourceResourceSet,
         array $data,
         string $verb,
-        Model $source = null
+        ?Model $source = null
     ) {
         $lastWord = 'update' == $verb ? 'updated' : 'created';
         $class = $sourceResourceSet->getResourceType()->getInstanceType()->getName();
@@ -144,7 +144,7 @@ class LaravelWriteQuery extends LaravelBaseQuery
         $parms = $this->createUpdateDeleteProcessInput($data, $paramList, $sourceEntityInstance);
         unset($data);
 
-        $result = call_user_func_array(array($controller, $method), $parms);
+        $result = call_user_func_array([$controller, $method], $parms);
 
         return $this->createUpdateDeleteProcessOutput($result);
     }

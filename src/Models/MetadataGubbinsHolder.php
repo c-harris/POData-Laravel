@@ -22,7 +22,7 @@ class MetadataGubbinsHolder
      * @param  EntityGubbins             $entity
      * @throws InvalidOperationException
      */
-    public function addEntity(EntityGubbins $entity)
+    public function addEntity(EntityGubbins $entity): void
     {
         $className = $entity->getClassName();
         if (array_key_exists($className, $this->relations)) {
@@ -84,7 +84,7 @@ class MetadataGubbinsHolder
             if ($stub instanceof AssociationStubMonomorphic) {
                 $msg = 'Monomorphic relation stub on ' . $className . ' ' . $relName
                        . ' should point to at most 1 other stub';
-                if (!(1 >= count($others))) {
+                if (!1 >= count($others)) {
                     throw new InvalidOperationException($msg);
                 }
             }
@@ -144,7 +144,7 @@ class MetadataGubbinsHolder
                     /** @var AssociationStubPolymorphic $stub */
                     $stub = clone $this->knownSides[$knownType][$key];
                     $isMulti = ($stub->getMultiplicity() == AssociationStubRelationType::MANY());
-                    $relPolyTypeName = substr($lc->getBaseType(), strrpos($lc->getBaseType(), '\\')+1);
+                    $relPolyTypeName = substr($lc->getBaseType(), strrpos($lc->getBaseType(), '\\') + 1);
                     $relPolyTypeName = Str::plural($relPolyTypeName, $isMulti ? 2 : 1);
                     $stub->setRelationName($stub->getRelationName() . '_' . $relPolyTypeName);
                     $assoc = new AssociationMonomorphic();
@@ -158,8 +158,7 @@ class MetadataGubbinsHolder
                 }
             }
         }
-        $result = array_merge($monoAssoc, $polyAssoc);
-        return $result;
+        return array_merge($monoAssoc, $polyAssoc);
     }
 
     public function hasClass($className)
@@ -170,7 +169,7 @@ class MetadataGubbinsHolder
     /**
      * @param string $className
      */
-    protected function checkClassExists(string $className)
+    protected function checkClassExists(string $className): void
     {
         if (!$this->hasClass($className)) {
             $msg = $className . ' does not exist in holder';

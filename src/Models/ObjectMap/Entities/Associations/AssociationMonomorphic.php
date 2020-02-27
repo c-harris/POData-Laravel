@@ -4,7 +4,6 @@ namespace AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations;
 
 class AssociationMonomorphic extends Association
 {
-
     /**
      * @var AssociationStubBase
      */
@@ -21,7 +20,7 @@ class AssociationMonomorphic extends Association
     /**
      * @param AssociationStubBase $last
      */
-    public function setLast(AssociationStubBase $last)
+    public function setLast(AssociationStubBase $last): void
     {
         $this->last = $last;
     }

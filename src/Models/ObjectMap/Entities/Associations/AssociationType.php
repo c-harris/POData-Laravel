@@ -21,10 +21,10 @@ use MyCLabs\Enum\Enum;
  */
 class AssociationType extends Enum
 {
-    const NULL_ONE_TO_NULL_ONE = 1;
-    const ONE_TO_ONE = 2;
-    const NULL_ONE_TO_ONE = 3;
-    const MANY_TO_MANY = 4;
-    const NULL_ONE_TO_MANY = 5;
-    const ONE_TO_MANY = 6;
+    public const NULL_ONE_TO_NULL_ONE = 1;
+    public const ONE_TO_ONE = 2;
+    public const NULL_ONE_TO_ONE = 3;
+    public const MANY_TO_MANY = 4;
+    public const NULL_ONE_TO_MANY = 5;
+    public const ONE_TO_MANY = 6;
 }

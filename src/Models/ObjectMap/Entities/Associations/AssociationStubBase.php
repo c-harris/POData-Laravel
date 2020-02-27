@@ -60,7 +60,7 @@ abstract class AssociationStubBase
     /**
      * @param string $relationName
      */
-    public function setRelationName($relationName)
+    public function setRelationName($relationName): void
     {
         $this->relationName = $this->checkStringInput($relationName) ? $relationName : $this->relationName;
     }
@@ -76,7 +76,7 @@ abstract class AssociationStubBase
     /**
      * @param AssociationStubRelationType $multiplicity
      */
-    public function setMultiplicity(AssociationStubRelationType $multiplicity)
+    public function setMultiplicity(AssociationStubRelationType $multiplicity): void
     {
         $this->multiplicity = $multiplicity;
     }
@@ -92,7 +92,7 @@ abstract class AssociationStubBase
     /**
      * @param string $keyField
      */
-    public function setKeyField($keyField)
+    public function setKeyField($keyField): void
     {
         $this->keyField = $this->checkStringInput($keyField) ? $keyField : $this->keyField;
     }
@@ -111,8 +111,8 @@ abstract class AssociationStubBase
         }
         $thisMult = $this->getMultiplicity();
         $thatMult = $otherStub->getMultiplicity();
-        return (AssociationStubRelationType::MANY() == $thisMult
-                || $thisMult != $thatMult);
+        return AssociationStubRelationType::MANY() == $thisMult
+                || $thisMult != $thatMult;
     }
 
     /**
@@ -159,7 +159,7 @@ abstract class AssociationStubBase
     /**
      * @param string $targType
      */
-    public function setTargType($targType)
+    public function setTargType($targType): void
     {
         $this->targType = $targType;
     }
@@ -175,7 +175,7 @@ abstract class AssociationStubBase
     /**
      * @param string $baseType
      */
-    public function setBaseType($baseType)
+    public function setBaseType($baseType): void
     {
         $this->baseType = $this->checkStringInput($baseType) ? $baseType : $this->baseType;
     }
@@ -191,7 +191,7 @@ abstract class AssociationStubBase
     /**
      * @param string $foreignField
      */
-    public function setForeignField($foreignField)
+    public function setForeignField($foreignField): void
     {
         $this->foreignField = $foreignField;
     }
@@ -207,7 +207,7 @@ abstract class AssociationStubBase
     /**
      * @param string[]|null $keyChain
      */
-    public function setThroughFieldChain(?array $keyChain)
+    public function setThroughFieldChain(?array $keyChain): void
     {
         $this->throughFieldChain = $keyChain;
     }

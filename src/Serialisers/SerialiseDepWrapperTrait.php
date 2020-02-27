@@ -123,7 +123,7 @@ trait SerialiseDepWrapperTrait
      *
      * @param RequestDescription $request
      */
-    public function setRequest(RequestDescription $request)
+    public function setRequest(RequestDescription $request): void
     {
         $this->request = $request;
         $this->stack->setRequest($request);
@@ -159,7 +159,7 @@ trait SerialiseDepWrapperTrait
     /**
      * @throws InvalidOperationException
      */
-    protected function loadStackIfEmpty()
+    protected function loadStackIfEmpty(): void
     {
         if (0 == count($this->lightStack)) {
             $typeName = $this->getRequest()->getTargetResourceType()->getName();
@@ -178,13 +178,13 @@ trait SerialiseDepWrapperTrait
         $segmentWrappers = $this->getStack()->getSegmentWrappers();
         $count = count($segmentWrappers);
 
-        return 0 == $count ? $this->getRequest()->getTargetResourceSetWrapper() : $segmentWrappers[$count-1];
+        return 0 == $count ? $this->getRequest()->getTargetResourceSetWrapper() : $segmentWrappers[$count - 1];
     }
 
     /**
      * @param int $newCount
      */
-    protected function updateLightStack(int $newCount)
+    protected function updateLightStack(int $newCount): void
     {
         $this->lightStack[$newCount - 1]['count']--;
         if (0 == $this->lightStack[$newCount - 1]['count']) {

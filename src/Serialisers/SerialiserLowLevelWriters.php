@@ -61,14 +61,14 @@ abstract class SerialiserLowLevelWriters
      */
     public static function writeBagValue(ResourceType &$resourceType, $result)
     {
-        if (!(null == $result || is_array($result))) {
+        if (!null == $result || is_array($result)) {
             throw new InvalidOperationException('Bag parameter must be null or array');
         }
         $typeKind = $resourceType->getResourceTypeKind();
         $kVal = $typeKind;
         if (!(ResourceTypeKind::PRIMITIVE() == $kVal || ResourceTypeKind::COMPLEX() == $kVal)) {
             $msg = '$bagItemResourceTypeKind != ResourceTypeKind::PRIMITIVE'
-                   .' && $bagItemResourceTypeKind != ResourceTypeKind::COMPLEX';
+                   . ' && $bagItemResourceTypeKind != ResourceTypeKind::COMPLEX';
             throw new InvalidOperationException($msg);
         }
         if (null == $result) {
@@ -181,7 +181,7 @@ abstract class SerialiserLowLevelWriters
                 $stringValue = $isUTF8 ? $primitiveValue : utf8_encode($primitiveValue);
                 break;
             case $type instanceof Boolean:
-                $stringValue = (true === $primitiveValue) ? 'true' : 'false';
+                $stringValue = true === $primitiveValue ? 'true' : 'false';
                 break;
             case $type instanceof Binary:
                 $stringValue = base64_encode($primitiveValue);

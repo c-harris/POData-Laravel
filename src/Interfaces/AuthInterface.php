@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 interface AuthInterface
 {
-
     /**
      * Is the requester permitted to perform the requested action on the model class (and instance, if supplied)?
      *

@@ -32,7 +32,7 @@ abstract class LaravelBaseQuery
      * LaravelBaseQuery constructor.
      * @param AuthInterface|null $auth
      */
-    public function __construct(AuthInterface $auth = null)
+    public function __construct(?AuthInterface $auth = null)
     {
         $this->auth = isset($auth) ? $auth : new NullAuthProvider();
         $this->metadataProvider = new MetadataProvider(App::make('app'));
@@ -92,8 +92,7 @@ abstract class LaravelBaseQuery
     {
         if ($sourceEntityInstance instanceof QueryResult) {
             $source = $sourceEntityInstance->results;
-            $source = (is_array($source)) ? $source[0] : $source;
-            return $source;
+            return is_array($source) ? $source[0] : $source;
         }
         return $sourceEntityInstance;
     }

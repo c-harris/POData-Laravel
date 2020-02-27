@@ -184,7 +184,7 @@ trait MetadataControllerTrait
      *
      * @throws \Exception
      */
-    private function checkCrudVerbDefined(string $crudVerb)
+    private function checkCrudVerbDefined(string $crudVerb): void
     {
         if (!in_array($crudVerb, $this->crudVerbs) && !in_array($crudVerb, $this->optionalVerbs)) {
             $msg = 'CRUD verb ' . $crudVerb . ' not defined';

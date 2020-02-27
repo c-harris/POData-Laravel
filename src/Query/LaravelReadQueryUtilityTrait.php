@@ -8,12 +8,10 @@
 namespace AlgoWeb\PODataLaravel\Query;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\App;
 use POData\Common\InvalidOperationException;
-use POData\Common\ODataException;
 use POData\Providers\Metadata\ResourceSet;
 use POData\UriProcessor\QueryProcessor\SkipTokenParser\SkipTokenInfo;
 use POData\UriProcessor\ResourcePathProcessor\SegmentParser\KeyDescriptor;
@@ -37,7 +35,7 @@ trait LaravelReadQueryUtilityTrait
         $values = $skipToken->getOrderByKeysInToken();
         $numValues = count($values);
         if ($numValues != count($segments)) {
-            $msg = 'Expected '.count($segments).', got '.$numValues;
+            $msg = 'Expected ' . count($segments) . ', got ' . $numValues;
             throw new InvalidOperationException($msg);
         }
 
@@ -51,7 +49,7 @@ trait LaravelReadQueryUtilityTrait
             $processed[$name] = ['direction' => $line['direction'], 'value' => $line['value']];
             $sourceEntityInstance = $sourceEntityInstance
                 ->orWhere(
-                    function (Builder $query) use ($processed) {
+                    function (Builder $query) use ($processed): void {
                         foreach ($processed as $key => $proc) {
                             $query->where($key, $proc['direction'], $proc['value']);
                         }
@@ -81,7 +79,7 @@ trait LaravelReadQueryUtilityTrait
      * @throws \ReflectionException
      * @return Model|Relation|mixed|null
      */
-    protected function checkSourceInstance($source, ResourceSet $resourceSet = null)
+    protected function checkSourceInstance($source, ?ResourceSet $resourceSet = null)
     {
         if (!(null == $source || $source instanceof Model || $source instanceof Relation)) {
             $msg = 'Source entity instance must be null, a model, or a relation.';
@@ -100,10 +98,10 @@ trait LaravelReadQueryUtilityTrait
      * @param  KeyDescriptor|null        $keyDescriptor
      * @throws InvalidOperationException
      */
-    protected function processKeyDescriptor(&$sourceEntityInstance, KeyDescriptor $keyDescriptor = null)
+    protected function processKeyDescriptor(&$sourceEntityInstance, ?KeyDescriptor $keyDescriptor = null): void
     {
         if ($keyDescriptor) {
-            $table = ($sourceEntityInstance instanceof Model) ? $sourceEntityInstance->getTable() . '.' : '';
+            $table = $sourceEntityInstance instanceof Model ? $sourceEntityInstance->getTable() . '.' : '';
             foreach ($keyDescriptor->getValidatedNamedValues() as $key => $value) {
                 $trimValue = trim($value[0], '\'');
                 $sourceEntityInstance = $sourceEntityInstance->where($table . $key, $trimValue);
@@ -116,9 +114,9 @@ trait LaravelReadQueryUtilityTrait
      * @throws InvalidOperationException
      * @return array
      */
-    protected function processEagerLoadList(array $eagerLoad = null)
+    protected function processEagerLoadList(?array $eagerLoad = null)
     {
-        $load = (null === $eagerLoad) ? [] : $eagerLoad;
+        $load = null === $eagerLoad ? [] : $eagerLoad;
         $rawLoad = [];
         foreach ($load as $line) {
             if (!is_string($line)) {

@@ -28,7 +28,7 @@ class LaravelBulkQuery
     /** @var MetadataControllerContainer */
     protected $controllerContainer;
 
-    public function __construct(LaravelQuery &$query, AuthInterface $auth = null)
+    public function __construct(LaravelQuery &$query, ?AuthInterface $auth = null)
     {
         $this->auth = isset($auth) ? $auth : new NullAuthProvider();
         $this->metadataProvider = new MetadataProvider(App::make('app'));
@@ -144,7 +144,7 @@ class LaravelBulkQuery
      * @throws InvalidOperationException
      * @return array
      */
-    protected function prepareBulkRequestInput(array $paramList, array $data, array $keyDescriptors = null)
+    protected function prepareBulkRequestInput(array $paramList, array $data, ?array $keyDescriptors = null)
     {
         $parms = [];
         $isCreate = null === $keyDescriptors;
@@ -198,7 +198,7 @@ class LaravelBulkQuery
         array $data,
         array $mapping,
         string $pastVerb,
-        array $keyDescriptor = null
+        ?array $keyDescriptor = null
     ) {
         $class = $sourceResourceSet->getResourceType()->getInstanceType()->getName();
         $controlClass = $mapping['controller'];
@@ -207,7 +207,7 @@ class LaravelBulkQuery
         $controller = App::make($controlClass);
         $parms = $this->prepareBulkRequestInput($paramList, $data, $keyDescriptor);
 
-        $callResult = call_user_func_array(array($controller, $method), $parms);
+        $callResult = call_user_func_array([$controller, $method], $parms);
         $payload = $this->createUpdateDeleteProcessOutput($callResult);
         $success = isset($payload['id']) && is_array($payload['id']);
 

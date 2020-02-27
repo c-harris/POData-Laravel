@@ -18,7 +18,7 @@ class MetadataRouteProvider extends ServiceProvider
         $this->setupRoute();
     }
 
-    private function setupRoute()
+    private function setupRoute(): void
     {
         $authMiddleware = $this->getAuthMiddleware();
         $controllerMethod = 'AlgoWeb\PODataLaravel\Controllers\ODataController@index';

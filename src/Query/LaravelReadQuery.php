@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Facades\App;
 use POData\Common\InvalidOperationException;
 use POData\Common\ODataException;
 use POData\Providers\Metadata\ResourceProperty;
@@ -51,12 +50,12 @@ class LaravelReadQuery extends LaravelBaseQuery
     public function getResourceSet(
         QueryType $queryType,
         ResourceSet $resourceSet,
-        FilterInfo $filterInfo = null,
+        ?FilterInfo $filterInfo = null,
         $orderBy = null,
         $top = null,
         $skip = null,
-        SkipTokenInfo $skipToken = null,
-        array $eagerLoad = null,
+        ?SkipTokenInfo $skipToken = null,
+        ?array $eagerLoad = null,
         $sourceEntityInstance = null
     ) {
         $rawLoad = $this->processEagerLoadList($eagerLoad);
@@ -72,9 +71,9 @@ class LaravelReadQuery extends LaravelBaseQuery
         $checkInstance = $sourceEntityInstance instanceof Model ? $sourceEntityInstance : null;
         $this->checkAuth($sourceEntityInstance, $checkInstance);
 
-        $result          = new QueryResult();
+        $result = new QueryResult();
         $result->results = null;
-        $result->count   = null;
+        $result->count = null;
 
         $sourceEntityInstance = $this->buildOrderBy($sourceEntityInstance, $tableName, $orderBy);
 
@@ -101,7 +100,7 @@ class LaravelReadQuery extends LaravelBaseQuery
             };
         }
 
-        list($bulkSetCount, $resultSet, $resultCount, $skip) = $this->applyFiltering(
+        [$bulkSetCount, $resultSet, $resultCount, $skip] = $this->applyFiltering(
             $sourceEntityInstance,
             $nullFilter,
             $rawLoad,
@@ -146,11 +145,11 @@ class LaravelReadQuery extends LaravelBaseQuery
         /* @noinspection PhpUnusedParameterInspection */
         ResourceSet $targetResourceSet,
         ResourceProperty $targetProperty,
-        FilterInfo $filter = null,
+        ?FilterInfo $filter = null,
         $orderBy = null,
         $top = null,
         $skip = null,
-        SkipTokenInfo $skipToken = null
+        ?SkipTokenInfo $skipToken = null
     ) {
         $this->checkAuth($sourceEntityInstance);
 
@@ -185,8 +184,8 @@ class LaravelReadQuery extends LaravelBaseQuery
      */
     public function getResourceFromResourceSet(
         ResourceSet $resourceSet,
-        KeyDescriptor $keyDescriptor = null,
-        array $eagerLoad = null
+        ?KeyDescriptor $keyDescriptor = null,
+        ?array $eagerLoad = null
     ) {
         return $this->getResource($resourceSet, $keyDescriptor, [], $eagerLoad);
     }
@@ -205,10 +204,10 @@ class LaravelReadQuery extends LaravelBaseQuery
      * @return Model|null
      */
     public function getResource(
-        ResourceSet $resourceSet = null,
-        KeyDescriptor $keyDescriptor = null,
+        ?ResourceSet $resourceSet = null,
+        ?KeyDescriptor $keyDescriptor = null,
         array $whereCondition = [],
-        array $eagerLoad = null,
+        ?array $eagerLoad = null,
         $sourceEntityInstance = null
     ) {
         if (null == $resourceSet && null == $sourceEntityInstance) {
@@ -227,7 +226,7 @@ class LaravelReadQuery extends LaravelBaseQuery
             $model = $sourceEntityInstance->getRelated();
             $modelLoad = $model->getEagerLoad();
         }
-        if (!(isset($modelLoad))) {
+        if (!isset($modelLoad)) {
             throw new InvalidOperationException('');
         }
 
@@ -322,7 +321,7 @@ class LaravelReadQuery extends LaravelBaseQuery
      *
      * @throws ODataException
      */
-    private function checkAuth($sourceEntityInstance, $checkInstance = null)
+    private function checkAuth($sourceEntityInstance, $checkInstance = null): void
     {
         $check = array_reduce([$sourceEntityInstance, $checkInstance], function ($carry, $item) {
             if ($item instanceof Model || $item instanceof Relation) {
@@ -351,7 +350,7 @@ class LaravelReadQuery extends LaravelBaseQuery
         array $rawLoad = [],
         int $top = PHP_INT_MAX,
         int $skip = 0,
-        callable $isvalid = null
+        ?callable $isvalid = null
     ) {
         $bulkSetCount = $sourceEntityInstance->count();
         $bigSet = 20000 < $bulkSetCount;
@@ -364,7 +363,7 @@ class LaravelReadQuery extends LaravelBaseQuery
                 ->get();
             $resultCount = $bulkSetCount;
         } elseif ($bigSet) {
-            if (!(isset($isvalid))) {
+            if (!isset($isvalid)) {
                 $msg = 'Filter closure not set';
                 throw new InvalidOperationException($msg);
             }
@@ -375,7 +374,7 @@ class LaravelReadQuery extends LaravelBaseQuery
             // loop thru, chunk by chunk, to reduce chances of exhausting memory
             $sourceEntityInstance->chunk(
                 5000,
-                function (Collection $results) use ($isvalid, &$skip, &$resultSet, &$rawCount, $rawTop) {
+                function (Collection $results) use ($isvalid, &$skip, &$resultSet, &$rawCount, $rawTop): void {
                     // apply filter
                     $results = $results->filter($isvalid);
                     // need to iterate through full result set to find count of items matching filter,
@@ -411,7 +410,7 @@ class LaravelReadQuery extends LaravelBaseQuery
      * @param  InternalOrderByInfo|null $orderBy
      * @return mixed
      */
-    protected function buildOrderBy($sourceEntityInstance, string $tableName, InternalOrderByInfo $orderBy = null)
+    protected function buildOrderBy($sourceEntityInstance, string $tableName, ?InternalOrderByInfo $orderBy = null)
     {
         if (null != $orderBy) {
             foreach ($orderBy->getOrderByInfo()->getOrderByPathSegments() as $order) {
@@ -443,7 +442,7 @@ class LaravelReadQuery extends LaravelBaseQuery
         $resultSet,
         int $resultCount,
         int $bulkSetCount
-    ) {
+    ): void {
         $qVal = $queryType;
         if (QueryType::ENTITIES() == $qVal || QueryType::ENTITIES_WITH_COUNT() == $qVal) {
             $result->results = [];

@@ -11,26 +11,26 @@ use POData\UriProcessor\QueryProcessor\ExpressionParser\Expressions\PropertyAcce
 
 class LaravelExpressionProvider implements IExpressionProvider
 {
-    const ADD = '+';
-    const CLOSE_BRACKET = ')';
-    const COMMA = ',';
-    const DIVIDE = '/';
-    const SUBTRACT = '-';
-    const EQUAL = '==';
-    const GREATER_THAN = '>';
-    const GREATER_THAN_OR_EQUAL = '>=';
-    const LESS_THAN = '<';
-    const LESS_THAN_OR_EQUAL = '<=';
-    const LOGICAL_AND = '&&';
-    const LOGICAL_NOT = '!';
-    const LOGICAL_OR = '||';
-    const MEMBER_ACCESS = '->';
-    const MODULO = '%';
-    const MULTIPLY = '*';
-    const NEGATE = '-';
-    const NOT_EQUAL = '!=';
-    const OPEN_BRACKET = '(';
-    const TYPE_NAMESPACE = 'POData\\Providers\\Metadata\\Type\\';
+    public const ADD = '+';
+    public const CLOSE_BRACKET = ')';
+    public const COMMA = ',';
+    public const DIVIDE = '/';
+    public const SUBTRACT = '-';
+    public const EQUAL = '==';
+    public const GREATER_THAN = '>';
+    public const GREATER_THAN_OR_EQUAL = '>=';
+    public const LESS_THAN = '<';
+    public const LESS_THAN_OR_EQUAL = '<=';
+    public const LOGICAL_AND = '&&';
+    public const LOGICAL_NOT = '!';
+    public const LOGICAL_OR = '||';
+    public const MEMBER_ACCESS = '->';
+    public const MODULO = '%';
+    public const MULTIPLY = '*';
+    public const NEGATE = '-';
+    public const NOT_EQUAL = '!=';
+    public const OPEN_BRACKET = '(';
+    public const TYPE_NAMESPACE = 'POData\\Providers\\Metadata\\Type\\';
 
     private $functionDescriptionParsers;
 
@@ -54,7 +54,7 @@ class LaravelExpressionProvider implements IExpressionProvider
         };
         $this->functionDescriptionParsers[ODataConstants::STRFUN_ENDSWITH] = function ($params) {
             return '(strcmp(substr(' . $params[0] . ', strlen(' . $params[0] . ') - strlen(' . $params[1] . ')), '
-                   .$params[1] . ') === 0)';
+                   . $params[1] . ') === 0)';
         };
         $this->functionDescriptionParsers[ODataConstants::STRFUN_INDEXOF] = function ($params) {
             return 'strpos(' . $params[0] . ', ' . $params[1] . ')';
@@ -154,7 +154,7 @@ class LaravelExpressionProvider implements IExpressionProvider
      * @param ResourceType $resourceType The resource type on which the filter
      *                                   is going to be applied
      */
-    public function setResourceType(ResourceType $resourceType)
+    public function setResourceType(ResourceType $resourceType): void
     {
         $this->iteratorName = '$' . $resourceType->getName();
         $this->resourceType = $resourceType;
@@ -289,8 +289,7 @@ class LaravelExpressionProvider implements IExpressionProvider
             $parent = $parent->getParent();
         } while ($parent != null);
         $variable = rtrim($variable, self::MEMBER_ACCESS);
-        $variable = $this->getIteratorName() . self::MEMBER_ACCESS . $variable;
-        return $variable;
+        return $this->getIteratorName() . self::MEMBER_ACCESS . $variable;
     }
     /**
      * Call-back for function call expression.

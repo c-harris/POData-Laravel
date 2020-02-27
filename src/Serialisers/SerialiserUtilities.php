@@ -32,14 +32,14 @@ abstract class SerialiserUtilities
         if (28 < $resourceKind) {
             return false;
         }
-        return 0 == ($resourceKind % 4);
+        return 0 == $resourceKind % 4;
     }
 
     /**
      * @param  QueryResult               $entryObjects
      * @throws InvalidOperationException
      */
-    public static function checkElementsInput(QueryResult &$entryObjects)
+    public static function checkElementsInput(QueryResult &$entryObjects): void
     {
         $res = $entryObjects->results;
         if (!(is_array($res) || $res instanceof Collection)) {
@@ -57,7 +57,7 @@ abstract class SerialiserUtilities
      * @param  QueryResult               $entryObject
      * @throws InvalidOperationException
      */
-    public static function checkSingleElementInput(QueryResult $entryObject)
+    public static function checkSingleElementInput(QueryResult $entryObject): void
     {
         if (!$entryObject->results instanceof Model) {
             $res = $entryObject->results;

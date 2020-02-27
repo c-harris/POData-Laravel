@@ -5,14 +5,11 @@ namespace AlgoWeb\PODataLaravel\Serialisers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 use POData\Common\InvalidOperationException;
-use POData\Common\Messages;
 use POData\Common\ODataConstants;
 use POData\Common\ODataException;
 use POData\IService;
 use POData\ObjectModel\IObjectSerialiser;
-use POData\ObjectModel\ODataBagContent;
 use POData\ObjectModel\ODataCategory;
 use POData\ObjectModel\ODataEntry;
 use POData\ObjectModel\ODataFeed;
@@ -24,25 +21,14 @@ use POData\ObjectModel\ODataPropertyContent;
 use POData\ObjectModel\ODataTitle;
 use POData\ObjectModel\ODataURL;
 use POData\ObjectModel\ODataURLCollection;
-use POData\Providers\Metadata\IMetadataProvider;
 use POData\Providers\Metadata\ResourceEntityType;
 use POData\Providers\Metadata\ResourceProperty;
 use POData\Providers\Metadata\ResourcePropertyKind;
 use POData\Providers\Metadata\ResourceSet;
-use POData\Providers\Metadata\ResourceSetWrapper;
 use POData\Providers\Metadata\ResourceType;
-use POData\Providers\Metadata\ResourceTypeKind;
-use POData\Providers\Metadata\Type\Binary;
-use POData\Providers\Metadata\Type\Boolean;
-use POData\Providers\Metadata\Type\DateTime;
 use POData\Providers\Metadata\Type\IType;
-use POData\Providers\Metadata\Type\StringType;
 use POData\Providers\Query\QueryResult;
 use POData\Providers\Query\QueryType;
-use POData\UriProcessor\QueryProcessor\ExpandProjectionParser\ExpandedProjectionNode;
-use POData\UriProcessor\QueryProcessor\ExpandProjectionParser\ProjectionNode;
-use POData\UriProcessor\QueryProcessor\ExpandProjectionParser\RootProjectionNode;
-use POData\UriProcessor\QueryProcessor\OrderByParser\InternalOrderByInfo;
 use POData\UriProcessor\RequestDescription;
 use POData\UriProcessor\SegmentStack;
 
@@ -70,7 +56,7 @@ class IronicSerialiser implements IObjectSerialiser
      * @param  RequestDescription|null $request Type instance describing the client submitted request
      * @throws \Exception
      */
-    public function __construct(IService $service, RequestDescription $request = null)
+    public function __construct(IService $service, ?RequestDescription $request = null)
     {
         $this->service = $service;
         $this->request = $request;
@@ -104,7 +90,7 @@ class IronicSerialiser implements IObjectSerialiser
         $this->isBaseWritten = true;
 
         $stackCount = count($this->lightStack);
-        $topOfStack = $this->lightStack[$stackCount-1];
+        $topOfStack = $this->lightStack[$stackCount - 1];
         /** @var object $res */
         $res = $entryObject->results;
         $payloadClass = get_class($res);
@@ -240,7 +226,7 @@ class IronicSerialiser implements IObjectSerialiser
         $resourceSet = $this->getRequest()->getTargetResourceSetWrapper()->getResourceSet();
         $requestTop = $this->getRequest()->getTopOptionCount();
         $pageSize = $this->getService()->getConfiguration()->getEntitySetPageSize($resourceSet);
-        $requestTop = (null === $requestTop) ? $pageSize+1 : $requestTop;
+        $requestTop = null === $requestTop ? $pageSize + 1 : $requestTop;
 
         if (true === $entryObjects->hasMore && $requestTop > $pageSize) {
             $this->buildNextPageLink($entryObjects, $odata);
@@ -385,7 +371,7 @@ class IronicSerialiser implements IObjectSerialiser
      * @throws \ReflectionException
      * @return ODataPropertyContent
      */
-    public function writeTopLevelPrimitive(QueryResult &$primitiveValue, ResourceProperty &$resourceProperty = null)
+    public function writeTopLevelPrimitive(QueryResult &$primitiveValue, ?ResourceProperty &$resourceProperty = null)
     {
         if (null === $resourceProperty) {
             throw new InvalidOperationException('Resource property must not be null');
@@ -439,7 +425,7 @@ class IronicSerialiser implements IObjectSerialiser
         $type,
         $relativeUri,
         ResourceType $resourceType,
-        ODataMediaLink &$mediaLink = null,
+        ?ODataMediaLink &$mediaLink = null,
         array &$mediaLinks = []
     ) {
         $context = $this->getService()->getOperationContext();
@@ -498,7 +484,7 @@ class IronicSerialiser implements IObjectSerialiser
         ODataLink $nuLink,
         int $propKind,
         string $propName
-    ) {
+    ): void {
         $nextName = $prop->getResourceType()->getName();
         $nuLink->isExpanded = true;
         $value = $entryObject->results->$propName;
@@ -608,7 +594,7 @@ class IronicSerialiser implements IObjectSerialiser
      * @throws ODataException
      * @throws \ReflectionException
      */
-    protected function buildEntriesFromElements($res, ODataFeed $odata)
+    protected function buildEntriesFromElements($res, ODataFeed $odata): void
     {
         foreach ($res as $entry) {
             if (!$entry instanceof QueryResult) {

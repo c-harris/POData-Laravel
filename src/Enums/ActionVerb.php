@@ -12,8 +12,8 @@ use MyCLabs\Enum\Enum;
  */
 class ActionVerb extends Enum
 {
-    const CREATE = 'create';
-    const READ = 'read';
-    const UPDATE = 'update';
-    const DELETE = 'delete';
+    public const CREATE = 'create';
+    public const READ = 'read';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
 }

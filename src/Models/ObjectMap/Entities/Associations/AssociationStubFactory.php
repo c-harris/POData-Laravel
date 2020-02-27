@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations;
@@ -29,15 +30,13 @@ abstract class AssociationStubFactory
     {
         $relation = $parent->{$name}();
         $handler = self::getHandlerMethod($relation);
-        /**
-         * @var AssociationStubBase $stub
-         */
+        /** @var AssociationStubBase $stub */
         $stub = self::{'handle' . $handler}($name, $relation);
         $stub->setBaseType(get_class($parent));
         return $stub;
     }
 
-    private static function getHandlerMethod(Relation $relation):string
+    private static function getHandlerMethod(Relation $relation): string
     {
         $methods = [];
         $methods[$relation instanceof BelongsTo] = 'BelongsTo'; //DONE
@@ -197,7 +196,7 @@ abstract class AssociationStubFactory
      * @param  string                     $cacheKey
      * @return AssociationStubPolymorphic
      */
-    protected static function handleMorphOne(string $name, Relation $relation, $cacheKey = 'MorphOneOrMany'):AssociationStubPolymorphic
+    protected static function handleMorphOne(string $name, Relation $relation, $cacheKey = 'MorphOneOrMany'): AssociationStubPolymorphic
     {
         $stub = new AssociationStubPolymorphic();
         $keyChain = self::getKeyChain($relation, $cacheKey);
@@ -236,7 +235,7 @@ abstract class AssociationStubFactory
      * @param string $cacheKey
      * @return array
      */
-    private static function getKeyChain(Relation $relation, string $cacheKey) : array
+    private static function getKeyChain(Relation $relation, string $cacheKey): array
     {
         $fields = self::$fieldOrderCache[$cacheKey];
         $getter = function () use ($fields) {
@@ -258,10 +257,10 @@ abstract class AssociationStubFactory
 
     private static $fieldOrderCache = [
         'BelongsTo' => ['foreignKey', 'ownerKey'],
-        'BelongsToMany' => ['parentKey','foreignPivotKey','relatedPivotKey','relatedKey'],
+        'BelongsToMany' => ['parentKey', 'foreignPivotKey', 'relatedPivotKey', 'relatedKey'],
         'HasOneOrMany' => ['localKey', 'foreignKey' ],
         'HasManyThrough' => ['localKey', 'firstKey', 'secondLocalKey', 'secondKey'],
-        'MorphToMany' => ['parentKey','foreignPivotKey','morphType', 'relatedPivotKey','relatedKey'],
+        'MorphToMany' => ['parentKey', 'foreignPivotKey', 'morphType', 'relatedPivotKey', 'relatedKey'],
         'MorphTo' => ['foreignKey', 'morphType', 'ownerKey'],
         'MorphOneOrMany' => ['foreignKey', 'morphType', 'localKey'],
         'inverse' => ['inverse'], // TODO: currently used to get inverse, should be removed when morphtomany is fixed

@@ -26,7 +26,7 @@ abstract class Association
     /**
      * @param AssociationStubBase $first
      */
-    public function setFirst(AssociationStubBase $first)
+    public function setFirst(AssociationStubBase $first): void
     {
         $this->first = $first;
     }

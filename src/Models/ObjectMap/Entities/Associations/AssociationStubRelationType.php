@@ -13,7 +13,7 @@ use MyCLabs\Enum\Enum;
  */
 class AssociationStubRelationType extends Enum
 {
-    const NULL_ONE = 1;
-    const ONE = 2;
-    const MANY = 4;
+    public const NULL_ONE = 1;
+    public const ONE = 2;
+    public const MANY = 4;
 }

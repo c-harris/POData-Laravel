@@ -14,22 +14,22 @@ trait MetadataProviderStepTrait
     protected static $afterVerify;
     protected static $afterImplement;
 
-    public static function setAfterExtract(callable $method = null)
+    public static function setAfterExtract(?callable $method = null): void
     {
         self::$afterExtract = $method;
     }
 
-    public static function setAfterUnify(callable $method = null)
+    public static function setAfterUnify(?callable $method = null): void
     {
         self::$afterUnify = $method;
     }
 
-    public static function setAfterVerify(callable $method = null)
+    public static function setAfterVerify(?callable $method = null): void
     {
         self::$afterVerify = $method;
     }
 
-    public static function setAfterImplement(callable $method = null)
+    public static function setAfterImplement(?callable $method = null): void
     {
         self::$afterImplement = $method;
     }
@@ -40,7 +40,7 @@ trait MetadataProviderStepTrait
      * @param mixed         $parm
      * @param callable|null $func
      */
-    private function handleCustomFunction($parm, callable $func = null)
+    private function handleCustomFunction($parm, ?callable $func = null): void
     {
         if (null != $func) {
             $func($parm);
