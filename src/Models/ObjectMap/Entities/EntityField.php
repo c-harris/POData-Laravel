@@ -73,8 +73,8 @@ class EntityField
     public function setPrimitiveType(EntityFieldPrimitiveType $primitiveType)
     {
         $this->primitiveType = $primitiveType;
-        $rawType = $this->primitiveTypeToEdmType($primitiveType);
-        $this->edmFieldType = 'stream' === $rawType ? $rawType : new EdmPrimitiveType($rawType);
+        $rawType             = $this->primitiveTypeToEdmType($primitiveType);
+        $this->edmFieldType  = 'stream' === $rawType ? $rawType : new EdmPrimitiveType($rawType);
     }
 
     /**

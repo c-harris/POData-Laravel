@@ -12,6 +12,6 @@ use MyCLabs\Enum\Enum;
  */
 class EntityFieldType extends Enum
 {
-    const PRIMITIVE = 1;
+    const PRIMITIVE     = 1;
     const PRIMITIVE_BAG = 2;
 }

@@ -17,7 +17,7 @@ class SerialiserLowLevelWritersTest extends TestCase
     public function testUTF8StringNotMangled()
     {
         $expected = 'Müller';
-        $type = new StringType();
+        $type     = new StringType();
 
         $actual = SerialiserLowLevelWriters::primitiveToString($type, $expected);
 

@@ -18,7 +18,7 @@ class MetadataProviderClassTest extends TestCase
         // as PHP gets rather annoyed when you try to do so
         $foo = m::mock(MetadataProviderDummy::class)->makePartial();
 
-        $result = $foo->getCandidateModels();
+        $result     = $foo->getCandidateModels();
         $traitClass = TestModelTrait::class;
         $this->assertFalse(in_array($traitClass, $result));
     }

@@ -10,7 +10,7 @@ class NullAuthProviderTest extends TestCase
 {
     public function testCanAuth()
     {
-        $foo = new NullAuthProvider();
+        $foo    = new NullAuthProvider();
         $result = $foo->canAuth(ActionVerb::CREATE(), 'model');
         $this->assertTrue($result);
     }

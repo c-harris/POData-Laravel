@@ -16,11 +16,11 @@ class EmployeePrivilegesTableSeeder extends Seeder
         
         \DB::table('employee_privileges')->insert(
             [
-            0 =>
-            [
-                'employee_id' => 2,
-                'privilege_id' => 2,
-            ],
+                0 =>
+                [
+                    'employee_id' => 2,
+                    'privilege_id' => 2,
+                ],
             ]
         );
     }

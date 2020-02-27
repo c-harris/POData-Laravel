@@ -12,8 +12,8 @@ class EmployeePrivilege extends Model
 //    use \AlgoWeb\PODataLaravel\Models\MetadataTrait;
     protected $table = 'employee_privileges';
 
-    public $timestamps = false;
-    public $incrementing = false;
+    public $timestamps    = false;
+    public $incrementing  = false;
     protected $primaryKey = null;
 
     protected $fillable = [

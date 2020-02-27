@@ -32,7 +32,7 @@ class AssociationMonomorphic extends Association
     public function isOk()
     {
         $first = $this->getFirst();
-        $last = $this->getLast();
+        $last  = $this->getLast();
         if (null === $first || !$first->isOk()) {
             return false;
         }

@@ -18,12 +18,12 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     use \AlgoWeb\PODataLaravel\Models\MetadataTrait;
-    protected $table = 'test_cities';
-    public $timestamps = false;
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $table      = 'test_cities';
+    public $timestamps    = false;
+    public $incrementing  = false;
+    protected $keyType    = 'string';
     protected $primaryKey = 'cityId';
-    protected $fillable = [
+    protected $fillable   = [
         'name',
         'postcode',
         'country'

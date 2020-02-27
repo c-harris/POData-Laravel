@@ -27,8 +27,8 @@ class TestMonomorphicTarget extends Model
             $this->connect = $connect;
         } else {
             $this->processor = \Mockery::mock(\Illuminate\Database\Query\Processors\Processor::class)->makePartial();
-            $this->grammar = \Mockery::mock(\Illuminate\Database\Query\Grammars\Grammar::class)->makePartial();
-            $connect = \Mockery::mock(Connection::class)->makePartial();
+            $this->grammar   = \Mockery::mock(\Illuminate\Database\Query\Grammars\Grammar::class)->makePartial();
+            $connect         = \Mockery::mock(Connection::class)->makePartial();
             $connect->shouldReceive('getQueryGrammar')->andReturn($this->grammar);
             $connect->shouldReceive('getPostProcessor')->andReturn($this->processor);
             $this->connect = $connect;
