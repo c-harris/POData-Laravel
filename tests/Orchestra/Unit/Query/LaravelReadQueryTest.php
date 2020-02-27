@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: alex
  * Date: 26/02/20
- * Time: 1:42 AM
+ * Time: 1:42 AM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Unit\Query;
 
 use AlgoWeb\PODataLaravel\Enums\ActionVerb;
