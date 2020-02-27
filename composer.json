@@ -13,17 +13,17 @@
         "php": "^7.1",
         "laravel/framework": "^5.5|^6.0",
         "illuminate/http": "^5.5|^6.0",
-        "voku/anti-xss": "2.1.*",
         "symfony/yaml": "^2.7|^3.0|^4.0",
         "symfony/http-foundation": "^2.7|^3.0|^4.0"
     },
     "require-dev": {
+        "infection/infection": "^0.13|dev-master",
         "mockery/mockery": "dev-master",
-        "php-coveralls/php-coveralls": ">=v2.1",
-        "phpunit/phpunit": "^6.0|^7.0|^8.0",
         "orchestra/database": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0",
         "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0",
-        "infection/infection": "^0.13|dev-master"
+        "php-coveralls/php-coveralls": ">=v2.1",
+        "phpunit/phpunit": "^6.0|^7.0|^8.0",
+        "symplify/easy-coding-standard": "^7.3@dev"
     },
     "autoload": {
         "psr-4": {
@@ -40,7 +40,9 @@
         }
     },
     "scripts": {
-        "mutate": "vendor/bin/infection --threads=4"
+        "mutate": "vendor/bin/infection --threads=4",
+        "style-check": "php vendor/bin/ecs check src",
+        "style-fix": "php vendor/bin/ecs check src --fix"
     },
     "minimum-stability": "dev"
 }
