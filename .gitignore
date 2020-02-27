@@ -19,3 +19,5 @@ humbuglog.txt
 # misc
 build/
 cover/
+infection-log.txt
+.phpunit.result.cache
