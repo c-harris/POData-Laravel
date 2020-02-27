@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: alex
  * Date: 27/02/20
- * Time: 11:41 AM
+ * Time: 11:41 AM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Unit\Models;
 
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationStubFactory;
