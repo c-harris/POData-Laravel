@@ -11,21 +11,19 @@ abstract class AssociationFactory
     public static $marshalPolymorphics = true;
     public static function getAssocationFromStubs(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): Association
     {
-        return self::checkAssocations($stubOne, $stubTwo) ?? self::buildAssocationFromStubs($stubOne, $stubTwo);
+        $checkAssocation = self::checkAssocations($stubOne, $stubTwo);
+        return  null === $checkAssocation ? self::buildAssocationFromStubs($stubOne, $stubTwo) : $checkAssocation;
     }
 
     private static function buildAssocationFromStubs(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): Association
     {
-
         $oneFirst = $stubOne->getKeyField()->getIsKeyField();
         $twoFirst = $stubTwo->getKeyField()->getIsKeyField();
-        $first = $oneFirst === $twoFirst ? -1 === $stubOne->compare($stubTwo) : $oneFirst;
+        $first = -1 === $stubOne->compare($stubTwo);
 
         $association = new AssociationMonomorphic();
-        if($stubTwo->getTargType() == null){
-            dd($stubTwo);
-        }
         if($stubOne->getTargType() == null && self::$marshalPolymorphics){
+            $stubOne->addAssociation($association);
             $stubOne = self::marshalPolyToMono($stubOne, $stubTwo);
         }
 
@@ -36,8 +34,6 @@ abstract class AssociationFactory
     }
 
     private static function marshalPolyToMono(AssociationStubBase $stub, AssociationStubBase $stubTwo): AssociationStubBase{
-        $oldName = $stub->getRelationName();
-        //$stubOne->addAssociation($association);
         $stubNew = clone $stub;
         $relPolyTypeName = substr($stubTwo->getBaseType(), strrpos($stubTwo->getBaseType(), '\\')+1);
         $relPolyTypeName = Str::plural($relPolyTypeName,  1);
@@ -46,9 +42,7 @@ abstract class AssociationFactory
         $stubNew->setForeignFieldName($stubTwo->getKeyFieldName());
         $entity = $stub->getEntity();
         $stubs = $entity->getStubs();
-        if(array_key_exists($oldName, $stubs)){
-               //unset($stubs[$oldName]);
-        }
+
         $stubs[$stubNew->getRelationName()] = $stubNew;
         $entity->setStubs($stubs);
         return $stubNew;

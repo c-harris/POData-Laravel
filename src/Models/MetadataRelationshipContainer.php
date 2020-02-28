@@ -75,7 +75,6 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
             count($item->getThroughFieldChain()) == 3) ? null : $item->getBaseType();
 
         $otherCandidates = array_filter($this->getStubs($item->getTargType(), $baseTypeCheck), [$item, 'isCompatible']);
-
         $assocations = array_reduce($otherCandidates,
             function ($carry, $candidate) use ($item) {
                 $newAssocation = AssociationFactory::getAssocationFromStubs($candidate, $item);
@@ -128,6 +127,7 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
         if(empty($this->assocations)){
             $this->buildAssocations();
         }
+
         $this->checkClassExists($className);
         return array_reduce($this->entities[$className]->getStubs(), function($carry, AssociationStubBase $item){
             return array_merge($carry, $item->getAssocations());
