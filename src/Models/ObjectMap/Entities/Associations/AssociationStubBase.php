@@ -60,12 +60,12 @@ abstract class AssociationStubBase
     protected $associations = [];
 
     /**
-     * @var EntityGubbins the entity this stub lives on.
+     * @var EntityGubbins the entity this stub lives on
      */
     protected $entity;
 
     /**
-     * Sets the entity owning this AssocationStub
+     * Sets the entity owning this AssocationStub.
      *
      * @param EntityGubbins $entity
      */
@@ -75,7 +75,7 @@ abstract class AssociationStubBase
     }
 
     /**
-     * Gets the entity owning this AssocationStub
+     * Gets the entity owning this AssocationStub.
      *
      * @return EntityGubbins
      */
@@ -84,11 +84,12 @@ abstract class AssociationStubBase
         return $this->entity;
     }
     /**
-     * Adds this stub as a member of an assocation
+     * Adds this stub as a member of an assocation.
      *
      * @param Association $newAssocation the new assocation to be a member of
      */
-    public function addAssociation(Association $newAssocation): void {
+    public function addAssociation(Association $newAssocation): void
+    {
         $this->associations[spl_object_hash($newAssocation)] = $newAssocation;
     }
 
@@ -99,7 +100,7 @@ abstract class AssociationStubBase
      */
     public function getAssocations(): array
     {
-       return array_values($this->associations);
+        return array_values($this->associations);
     }
 
     /**
@@ -144,7 +145,6 @@ abstract class AssociationStubBase
 
     public function getKeyField() : ?EntityField
     {
-
         return $this->entity->getFields()[$this->getKeyFieldName()];
     }
 
@@ -202,7 +202,7 @@ abstract class AssociationStubBase
             }
         }
 
-        if(null === $this->throughFieldChain){
+        if (null === $this->throughFieldChain) {
             return false;
         }
         return (null === $targType) === (null === $foreignField);
