@@ -3,7 +3,6 @@
 
 namespace AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations;
 
-
 use Illuminate\Support\Str;
 
 abstract class AssociationFactory
@@ -19,10 +18,10 @@ abstract class AssociationFactory
     {
         $oneFirst = $stubOne->getKeyField()->getIsKeyField();
         $twoFirst = $stubTwo->getKeyField()->getIsKeyField();
-        $first = -1 === $stubOne->compare($stubTwo);
+        $first    = -1 === $stubOne->compare($stubTwo);
 
         $association = new AssociationMonomorphic();
-        if($stubOne->getTargType() == null && self::$marshalPolymorphics){
+        if ($stubOne->getTargType() == null && self::$marshalPolymorphics) {
             $stubOne->addAssociation($association);
             $stubOne = self::marshalPolyToMono($stubOne, $stubTwo);
         }
@@ -33,26 +32,28 @@ abstract class AssociationFactory
         return $association;
     }
 
-    private static function marshalPolyToMono(AssociationStubBase $stub, AssociationStubBase $stubTwo): AssociationStubBase{
-        $stubNew = clone $stub;
+    private static function marshalPolyToMono(AssociationStubBase $stub, AssociationStubBase $stubTwo): AssociationStubBase
+    {
+        $stubNew         = clone $stub;
         $relPolyTypeName = substr($stubTwo->getBaseType(), strrpos($stubTwo->getBaseType(), '\\')+1);
-        $relPolyTypeName = Str::plural($relPolyTypeName,  1);
+        $relPolyTypeName = Str::plural($relPolyTypeName, 1);
         $stubNew->setRelationName($stub->getRelationName() . '_' . $relPolyTypeName);
         $stubNew->setTargType($stubTwo->getBaseType());
         $stubNew->setForeignFieldName($stubTwo->getKeyFieldName());
         $entity = $stub->getEntity();
-        $stubs = $entity->getStubs();
+        $stubs  = $entity->getStubs();
 
         $stubs[$stubNew->getRelationName()] = $stubNew;
         $entity->setStubs($stubs);
         return $stubNew;
     }
 
-    private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association{
+    private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association
+    {
         $assocOne = $stubOne->getAssocations();
-        foreach($assocOne as $association){
+        foreach ($assocOne as $association) {
             $isFirst = $association->getFirst() === $stubOne;
-            if($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo){
+            if ($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo) {
                 return $association;
             }
         }
