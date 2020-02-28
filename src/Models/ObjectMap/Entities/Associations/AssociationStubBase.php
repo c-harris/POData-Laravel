@@ -89,7 +89,7 @@ abstract class AssociationStubBase
      * @param Association $newAssocation the new assocation to be a member of
      */
     public function addAssociation(Association $newAssocation): void {
-        $this->associations[] = $newAssocation;
+        $this->associations[spl_object_hash($newAssocation)] = $newAssocation;
     }
 
     /**
@@ -99,7 +99,7 @@ abstract class AssociationStubBase
      */
     public function getAssocations(): array
     {
-       return $this->associations;
+       return array_values($this->associations);
     }
 
     /**
@@ -137,9 +137,15 @@ abstract class AssociationStubBase
     /**
      * @return string
      */
-    public function getKeyFieldName()
+    public function getKeyFieldName(): string
     {
         return $this->keyFieldName;
+    }
+
+    public function getKeyField() : ?EntityField
+    {
+
+        return $this->entity->getFields()[$this->getKeyFieldName()];
     }
 
     /**
@@ -162,10 +168,7 @@ abstract class AssociationStubBase
         if (!$otherStub->isOk()) {
             return false;
         }
-        $thisMult = $this->getMultiplicity();
-        $thatMult = $otherStub->getMultiplicity();
-        return (AssociationStubRelationType::MANY() == $thisMult
-                || $thisMult != $thatMult);
+        return count($this->getThroughFieldChain()) === count($otherStub->getThroughFieldChain());
     }
 
     /**
@@ -197,6 +200,10 @@ abstract class AssociationStubBase
             if (!$this->checkStringInput($foreignField)) {
                 return false;
             }
+        }
+
+        if(null === $this->throughFieldChain){
+            return false;
         }
         return (null === $targType) === (null === $foreignField);
     }
