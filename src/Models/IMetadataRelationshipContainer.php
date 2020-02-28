@@ -28,22 +28,22 @@ interface IMetadataRelationshipContainer
     /**
      * gets All Association On a given class.
      *
-     * @param string $className
+     * @param  string        $className
      * @return Association[]
      */
     public function getRelationsByClass(string $className): array;
 
     /**
-     * gets all defined Association
+     * gets all defined Association.
      *
      * @return Association[]
      */
     public function getRelations(): array;
 
     /**
-     * checks if a class is loaded into the relation container
+     * checks if a class is loaded into the relation container.
      *
-     * @param string $className
+     * @param  string $className
      * @return bool
      */
     public function hasClass(string $className): bool ;

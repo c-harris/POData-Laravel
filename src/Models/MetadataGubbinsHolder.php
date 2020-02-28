@@ -39,7 +39,7 @@ class MetadataGubbinsHolder implements IMetadataRelationshipContainer
     }
 
     /**
-     * returns all Relation Stubs that are permitted at the other end
+     * returns all Relation Stubs that are permitted at the other end.
      *
      * @param $className
      * @param $relName

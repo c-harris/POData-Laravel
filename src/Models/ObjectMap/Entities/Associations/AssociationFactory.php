@@ -3,7 +3,6 @@
 
 namespace AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations;
 
-
 abstract class AssociationFactory
 {
     public static function getAssocationFromStubs(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): Association
@@ -13,21 +12,22 @@ abstract class AssociationFactory
 
     private static function buildAssocationFromStubs(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): Association
     {
-        $oneFirst = $stubOne->getKeyField()->getIsKeyField();
-        $twoFirst = $stubTwo->getKeyField()->getIsKeyField();
-        $first = $oneFirst === $twoFirst ? -1 === $stubOne->compare($stubTwo) : $oneFirst;
+        $oneFirst               = $stubOne->getKeyField()->getIsKeyField();
+        $twoFirst               = $stubTwo->getKeyField()->getIsKeyField();
+        $first                  = $oneFirst === $twoFirst ? -1 === $stubOne->compare($stubTwo) : $oneFirst;
         $input[intval(!$first)] = $stubOne;
-        $input[intval($first)] = $stubTwo;
-        $association = new AssociationMonomorphic();
+        $input[intval($first)]  = $stubTwo;
+        $association            = new AssociationMonomorphic();
         $association->setFirst($input[0]);
         $association->setLast($input[1]);
         return $association;
     }
-    private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association{
+    private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association
+    {
         $assocOne = $stubOne->getAssocations();
-        foreach($assocOne as $association){
+        foreach ($assocOne as $association) {
             $isFirst = $association->getFirst() === $stubOne;
-            if($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo){
+            if ($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo) {
                 return $association;
             }
         }

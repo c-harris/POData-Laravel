@@ -42,11 +42,11 @@ class MetadataProviderRelationTest extends TestCase
 
     public function testBootFromTwoArmedPolymorphicRelationBothOneToMany()
     {
-        $meta                 = [];
-        $meta['alternate_id'] = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $meta['id']           = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $meta['name']         = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $meta['photo']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $meta                    = [];
+        $meta['alternate_id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $meta['id']              = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $meta['name']            = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $meta['photo']           = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $meta['morph_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
 
         $this->setUpSchemaFacade();
@@ -92,10 +92,10 @@ class MetadataProviderRelationTest extends TestCase
 
     public function testMonomorphicManyToManyRelation()
     {
-        $metaRaw          = [];
-        $metaRaw['id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $metaRaw['name']  = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metaRaw['photo'] = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $metaRaw                    = [];
+        $metaRaw['id']              = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $metaRaw['name']            = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metaRaw['photo']           = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $metaRaw['morph_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
 
         $this->setUpSchemaFacade();
@@ -140,10 +140,10 @@ class MetadataProviderRelationTest extends TestCase
 
     public function testMorphOneToMorphTargetConcreteTypes()
     {
-        $metaRaw          = [];
-        $metaRaw['id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $metaRaw['name']  = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metaRaw['photo'] = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $metaRaw                    = [];
+        $metaRaw['id']              = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $metaRaw['name']            = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metaRaw['photo']           = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $metaRaw['morph_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $metaRaw['child_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
 
@@ -188,10 +188,10 @@ class MetadataProviderRelationTest extends TestCase
 
     public function testMorphManyToMorphTargetConcreteTypes()
     {
-        $metaRaw          = [];
-        $metaRaw['id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $metaRaw['name']  = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metaRaw['photo'] = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $metaRaw                    = [];
+        $metaRaw['id']              = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $metaRaw['name']            = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metaRaw['photo']           = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $metaRaw['morph_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
 
         $this->setUpSchemaFacade();
@@ -360,11 +360,11 @@ class MetadataProviderRelationTest extends TestCase
 
     public function testExposeHasManyThroughRelation()
     {
-        $metaRaw          = [];
-        $metaRaw['id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $metaRaw['name']  = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metaRaw['photo'] = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
-        $metaRaw['child_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $metaRaw                     = [];
+        $metaRaw['id']               = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $metaRaw['name']             = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metaRaw['photo']            = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $metaRaw['child_id']         = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $metaRaw['parent_id']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
 
         $this->setUpSchemaFacade();

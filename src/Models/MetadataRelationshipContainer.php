@@ -1,8 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace AlgoWeb\PODataLaravel\Models;
-
 
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\Association;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations\AssociationFactory;
@@ -24,7 +23,7 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
     private $stubs = [
     ];
     /**
-     * A Complete Set of Assocations Keyed by classname
+     * A Complete Set of Assocations Keyed by classname.
      *
      * @var Association[]
      */
@@ -37,7 +36,7 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
      */
     public function addEntity(EntityGubbins $entity): void
     {
-        $baseType = $entity->getClassName();
+        $baseType                  = $entity->getClassName();
         $this->entities[$baseType] = $entity;
         if (array_key_exists($baseType, $this->stubs)) {
             throw new \InvalidArgumentException(sprintf('%s already added', $baseType));
@@ -51,19 +50,19 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
 
     private function buildAssocations(): void
     {
-        array_walk_recursive($this->stubs, [$this, 'buildAssocationFromStub'] );
+        array_walk_recursive($this->stubs, [$this, 'buildAssocationFromStub']);
     }
 
     /**
-     * @param string $baseType
-     * @param string $targetType
+     * @param  string                $baseType
+     * @param  string                $targetType
      * @return AssociationStubBase[]
      */
     private function getStubs(?string $baseType, ?string $targetType): array
     {
-        if($baseType === null ||
+        if ($baseType === null ||
            !array_key_exists($baseType, $this->stubs) ||
-           !array_key_exists($targetType, $this->stubs[$baseType])){
+           !array_key_exists($targetType, $this->stubs[$baseType])) {
             return [];
         }
         return $this->stubs[$baseType][$targetType];
@@ -86,7 +85,8 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
         $this->addAssocations($assocations);
     }
 
-    private function addAssocations(array $additionals){
+    private function addAssocations(array $additionals)
+    {
         $this->assocations = array_merge($this->assocations, $additionals);
     }
 
@@ -103,35 +103,35 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
         $this->checkClassExists($className);
         if (!array_key_exists($relName, $this->entities[$className]->getStubs())) {
             $msg = 'Relation %s not registered on %s';
-            throw new \InvalidArgumentException(sprintf($msg,$relName,$className));
+            throw new \InvalidArgumentException(sprintf($msg, $relName, $className));
         }
 
-        if(empty($this->assocations)) {
+        if (empty($this->assocations)) {
             $this->buildAssocations();
         }
-        $entites = $this->entities[$className];
+        $entites  = $this->entities[$className];
         $relation = $entites->getStubs()[$relName];
-        return array_reduce($relation->getAssocations(), function($carry, Association $item) use ($relation){
+        return array_reduce($relation->getAssocations(), function ($carry, Association $item) use ($relation) {
             $carry[] = ($item->getFirst() === $relation) ? $item->getLast() : $item->getFirst();
             return $carry;
-        },[]);
+        }, []);
     }
 
     /**
      * gets All Association On a given class.
      *
-     * @param string $className
+     * @param  string        $className
      * @return Association[]
      */
     public function getRelationsByClass(string $className): array
     {
-        if(empty($this->assocations)){
+        if (empty($this->assocations)) {
             $this->buildAssocations();
         }
         $this->checkClassExists($className);
-        return array_reduce($this->entities[$className]->getStubs(), function($carry, AssociationStubBase $item){
+        return array_reduce($this->entities[$className]->getStubs(), function ($carry, AssociationStubBase $item) {
             return array_merge($carry, $item->getAssocations());
-        },[]);
+        }, []);
     }
 
     /**
@@ -141,27 +141,27 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
     {
         if (!$this->hasClass($className)) {
             $msg = '%s does not exist in holder';
-            throw new \InvalidArgumentException(sprintf($msg,$className));
+            throw new \InvalidArgumentException(sprintf($msg, $className));
         }
     }
     /**
-     * gets all defined Association
+     * gets all defined Association.
      *
-     * @return Association[]
      * @throws InvalidOperationException
+     * @return Association[]
      */
     public function getRelations(): array
     {
-        if(empty($this->assocations)) {
+        if (empty($this->assocations)) {
             $this->buildAssocations();
         }
         return array_values($this->assocations);
     }
 
     /**
-     * checks if a class is loaded into the relation container
+     * checks if a class is loaded into the relation container.
      *
-     * @param string $className
+     * @param  string $className
      * @return bool
      */
     public function hasClass(string $className): bool
