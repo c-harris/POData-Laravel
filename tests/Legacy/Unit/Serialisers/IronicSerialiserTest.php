@@ -406,11 +406,11 @@ class IronicSerialiserTest extends SerialiserTestBase
         $known = Carbon::create(2017, 1, 1, 0, 0, 0, 'UTC');
         Carbon::setTestNow($known);
 
-        $meta                 = [];
-        $meta['id']           = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $meta['alternate_id'] = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $meta['name']         = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $meta['photo']        = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
+        $meta                    = [];
+        $meta['id']              = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $meta['alternate_id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $meta['name']            = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $meta['photo']           = ['type' => 'blob', 'nullable' => true, 'fillable' => true, 'default' => null];
         $meta['morph_id']        = ['type' => 'string', 'nullable' => true, 'fillable' => true, 'default' => null];
 
         $this->setUpSchemaFacade();
@@ -680,13 +680,13 @@ class IronicSerialiserTest extends SerialiserTestBase
         $request->shouldReceive('fullUrl')
             ->andReturn('http://localhost/odata.svc/TestMonomorphicSources(1)?$expand=manySource');
 
-        $metadata         = [];
-        $metadata['id']   = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
-        $metadata['name'] = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metadata                = [];
+        $metadata['id']          = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
+        $metadata['name']        = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
         $metadata['many_source'] = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metadata['many_id'] = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metadata['one_source'] = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
-        $metadata['one_id'] = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metadata['many_id']     = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metadata['one_source']  = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
+        $metadata['one_id']      = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
 
         $source = new TestMonomorphicSource($metadata);
         $target = new TestMonomorphicTarget($metadata);

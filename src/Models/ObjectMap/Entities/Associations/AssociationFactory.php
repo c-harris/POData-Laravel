@@ -3,7 +3,6 @@
 
 namespace AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\Associations;
 
-
 use Illuminate\Support\Str;
 
 abstract class AssociationFactory
@@ -16,16 +15,15 @@ abstract class AssociationFactory
 
     private static function buildAssocationFromStubs(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): Association
     {
-
         $oneFirst = $stubOne->getKeyField()->getIsKeyField();
         $twoFirst = $stubTwo->getKeyField()->getIsKeyField();
-        $first = $oneFirst === $twoFirst ? -1 === $stubOne->compare($stubTwo) : $oneFirst;
+        $first    = $oneFirst === $twoFirst ? -1 === $stubOne->compare($stubTwo) : $oneFirst;
 
         $association = new AssociationMonomorphic();
-        if($stubTwo->getTargType() == null){
+        if ($stubTwo->getTargType() == null) {
             dd($stubTwo);
         }
-        if($stubOne->getTargType() == null && self::$marshalPolymorphics){
+        if ($stubOne->getTargType() == null && self::$marshalPolymorphics) {
             $stubOne = self::marshalPolyToMono($stubOne, $stubTwo);
         }
 
@@ -35,30 +33,32 @@ abstract class AssociationFactory
         return $association;
     }
 
-    private static function marshalPolyToMono(AssociationStubBase $stub, AssociationStubBase $stubTwo): AssociationStubBase{
+    private static function marshalPolyToMono(AssociationStubBase $stub, AssociationStubBase $stubTwo): AssociationStubBase
+    {
         $oldName = $stub->getRelationName();
         //$stubOne->addAssociation($association);
-        $stubNew = clone $stub;
+        $stubNew         = clone $stub;
         $relPolyTypeName = substr($stubTwo->getBaseType(), strrpos($stubTwo->getBaseType(), '\\')+1);
-        $relPolyTypeName = Str::plural($relPolyTypeName,  1);
+        $relPolyTypeName = Str::plural($relPolyTypeName, 1);
         $stubNew->setRelationName($stub->getRelationName() . '_' . $relPolyTypeName);
         $stubNew->setTargType($stubTwo->getBaseType());
         $stubNew->setForeignFieldName($stubTwo->getKeyFieldName());
         $entity = $stub->getEntity();
-        $stubs = $entity->getStubs();
-        if(array_key_exists($oldName, $stubs)){
-               //unset($stubs[$oldName]);
+        $stubs  = $entity->getStubs();
+        if (array_key_exists($oldName, $stubs)) {
+            //unset($stubs[$oldName]);
         }
         $stubs[$stubNew->getRelationName()] = $stubNew;
         $entity->setStubs($stubs);
         return $stubNew;
     }
 
-    private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association{
+    private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association
+    {
         $assocOne = $stubOne->getAssocations();
-        foreach($assocOne as $association){
+        foreach ($assocOne as $association) {
             $isFirst = $association->getFirst() === $stubOne;
-            if($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo){
+            if ($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo) {
                 return $association;
             }
         }
