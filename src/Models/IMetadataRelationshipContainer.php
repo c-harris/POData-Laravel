@@ -13,7 +13,6 @@ interface IMetadataRelationshipContainer
      * Add entity to Container.
      *
      * @param EntityGubbins $entity
-     * @throws InvalidOperationException
      */
     public function addEntity(EntityGubbins $entity): void ;
 
@@ -31,7 +30,6 @@ interface IMetadataRelationshipContainer
      *
      * @param string $className
      * @return Association[]
-     * @throws InvalidOperationException
      */
     public function getRelationsByClass(string $className): array;
 
@@ -39,7 +37,6 @@ interface IMetadataRelationshipContainer
      * gets all defined Association
      *
      * @return Association[]
-     * @throws InvalidOperationException
      */
     public function getRelations(): array;
 
