@@ -102,7 +102,6 @@ class CreateTestModelsTable extends Migration
             $table->float('weight')->default(0);
             $table->string('code')->default('');
             $table->morphs('morph');
-
         });
 
         Schema::create('test_morph_one_models', function (Blueprint $table) {
