@@ -73,7 +73,7 @@ class MetadataRelationshipContainer implements IMetadataRelationshipContainer
             count($item->getThroughFieldChain()) == 3) ? null : $item->getBaseType();
 
         $otherCandidates = array_filter($this->getStubs($item->getTargType(), $baseTypeCheck), [$item, 'isCompatible']);
-        $associations = array_reduce(
+        $associations    = array_reduce(
             $otherCandidates,
             function ($carry, $candidate) use ($item) {
                 $newAssociation = AssociationFactory::getAssocationFromStubs($candidate, $item);

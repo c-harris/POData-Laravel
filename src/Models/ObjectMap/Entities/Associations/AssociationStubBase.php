@@ -66,9 +66,9 @@ abstract class AssociationStubBase
 
     /**
      * AssociationStubBase constructor.
-     * @param string $relationName
-     * @param string $keyFieldName
-     * @param string[] $throughFieldChain
+     * @param string                      $relationName
+     * @param string                      $keyFieldName
+     * @param string[]                    $throughFieldChain
      * @param AssociationStubRelationType $multiplicity
      */
     public function __construct(
@@ -77,10 +77,10 @@ abstract class AssociationStubBase
         array $throughFieldChain,
         AssociationStubRelationType $multiplicity
     ) {
-        $this->relationName = $relationName;
-        $this->keyFieldName = $keyFieldName;
+        $this->relationName      = $relationName;
+        $this->keyFieldName      = $keyFieldName;
         $this->throughFieldChain = $throughFieldChain;
-        $this->multiplicity = $multiplicity;
+        $this->multiplicity      = $multiplicity;
     }
 
     /**
@@ -312,7 +312,7 @@ abstract class AssociationStubBase
     abstract public function morphicType() : string;
 
     /**
-     * @param mixed $input
+     * @param  mixed $input
      * @return bool
      */
     protected function checkStringInput($input) : bool
