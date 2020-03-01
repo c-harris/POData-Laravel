@@ -310,8 +310,8 @@ class MetadataProvider extends MetadataBaseProvider
     }
 
     /**
-     * @return array
      * @throws \Exception
+     * @return array
      */
     protected function getCandidateModels()
     {

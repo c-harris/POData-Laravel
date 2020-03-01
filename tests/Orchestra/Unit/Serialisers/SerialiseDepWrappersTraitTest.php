@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: alex
  * Date: 28/02/20
- * Time: 11:56 AM
+ * Time: 11:56 AM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Serialisers;
 
 use AlgoWeb\PODataLaravel\Orchestra\Tests\TestCase;
@@ -24,7 +23,7 @@ class SerialiseDepWrappersTraitTest extends TestCase
      */
     public function testSetRequest()
     {
-        $request = m::mock(RequestDescription::class);
+        $request            = m::mock(RequestDescription::class);
         $request->queryType = QueryType::COUNT();
 
         $service = m::mock(SimpleDataService::class)->makePartial();
@@ -46,7 +45,7 @@ class SerialiseDepWrappersTraitTest extends TestCase
      */
     public function testLoadStackIfEmpty()
     {
-        $request = m::mock(RequestDescription::class);
+        $request            = m::mock(RequestDescription::class);
         $request->queryType = QueryType::COUNT();
         $request->shouldReceive('getTargetResourceType->getName')->andReturn('NARF!');
 
@@ -57,7 +56,7 @@ class SerialiseDepWrappersTraitTest extends TestCase
         $foo = new DummyIronicSerialiser($service, $request);
 
         $expectedOriginal = [];
-        $original = $foo->getLightStack();
+        $original         = $foo->getLightStack();
         $this->assertEquals($expectedOriginal, $original);
 
         $expectedActual = [['type' => 'NARF!', 'property' => 'NARF!', 'count' => 1]];
