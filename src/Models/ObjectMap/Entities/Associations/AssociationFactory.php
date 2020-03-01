@@ -50,7 +50,7 @@ abstract class AssociationFactory
 
     private static function checkAssocations(AssociationStubBase $stubOne, AssociationStubBase $stubTwo): ?Association
     {
-        $assocOne = $stubOne->getAssocations();
+        $assocOne = $stubOne->getAssociations();
         foreach ($assocOne as $association) {
             $isFirst = $association->getFirst() === $stubOne;
             if ($association->{$isFirst ? 'getLast' : 'getFirst'}() == $stubTwo) {
