@@ -1,11 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: alex
  * Date: 28/02/20
- * Time: 12:13 PM
+ * Time: 12:13 PM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Serialisers;
 
 use AlgoWeb\PODataLaravel\Serialisers\IronicSerialiser;

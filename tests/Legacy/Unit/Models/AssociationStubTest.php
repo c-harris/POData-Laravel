@@ -137,7 +137,7 @@ class AssociationStubTest extends TestCase
         $expectedRel   = 'rel';
         $expectedMorph = 'morph';
         $foo           = new AssociationStubPolymorphic($expectedRel, $expectedKey, [], AssociationStubRelationType::NULL_ONE());
-        $actualKey = $foo->getKeyFieldName();
+        $actualKey     = $foo->getKeyFieldName();
         $this->assertEquals($expectedKey, $actualKey);
         $actualRel = $foo->getRelationName();
         $this->assertEquals($expectedRel, $actualRel);

@@ -11,14 +11,14 @@ use AlgoWeb\PODataLaravel\Orchestra\Tests\TestCase;
 use AlgoWeb\PODataLaravel\Serialisers\SerialiserLowLevelWriters;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Mockery as m;
 use POData\Common\InvalidOperationException;
 use POData\Providers\Metadata\ResourceProperty;
 use POData\Providers\Metadata\ResourcePropertyKind;
 use POData\Providers\Metadata\ResourceType;
 use POData\Providers\Metadata\ResourceTypeKind;
-use POData\Providers\Metadata\Type\StringType;
 use POData\Providers\Metadata\Type\DateTime;
-use Mockery as m;
+use POData\Providers\Metadata\Type\StringType;
 
 class SerialiserLowLevelWritersTest extends TestCase
 {
@@ -67,7 +67,7 @@ class SerialiserLowLevelWritersTest extends TestCase
         $rProp->shouldReceive('getName')->andReturn('property');
 
         $rType = m::mock(ResourceType::class);
-        $rType->shouldReceive("getAllProperties")->andReturn([$rProp]);
+        $rType->shouldReceive('getAllProperties')->andReturn([$rProp]);
         $rType->shouldReceive('getResourceTypeKind')->andReturn(ResourceTypeKind::PRIMITIVE());
         $rType->shouldReceive('getInstanceType')->andReturn(new \stdClass);
 
@@ -84,7 +84,7 @@ class SerialiserLowLevelWritersTest extends TestCase
         $rType = m::mock(ResourceType::class);
 
         $result = new \stdClass();
-        $coll = [$result];
+        $coll   = [$result];
 
         $this->expectException(InvalidOperationException::class);
         $this->expectExceptionMessage('circular loop was detected');
