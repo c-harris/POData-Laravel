@@ -1,11 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: alex
  * Date: 1/03/20
- * Time: 12:05 PM
+ * Time: 12:05 PM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Models\ObjectMap\Entities;
 
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Entities\EntityGubbins;
