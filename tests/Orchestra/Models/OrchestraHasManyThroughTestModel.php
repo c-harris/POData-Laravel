@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: alex
@@ -20,12 +22,12 @@ class OrchestraHasManyThroughTestModel extends Model
 
     protected $fillable = [ 'name', 'added_at', 'weight', 'code'];
 
-    public function children() : HasMany
+    public function children(): HasMany
     {
         return $this->hasMany(OrchestraHasManyTestModel::class, 'parent_id');
     }
 
-    public function grandchildren() : HasManyThrough
+    public function grandchildren(): HasManyThrough
     {
         return $this->hasManyThrough(
             OrchestraBelongsToTestModel::class,

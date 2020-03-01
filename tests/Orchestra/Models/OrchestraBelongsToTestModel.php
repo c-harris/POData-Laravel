@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: alex
@@ -19,7 +21,7 @@ class OrchestraBelongsToTestModel extends Model
 
     protected $fillable = [ 'name', 'added_at', 'weight', 'code'];
 
-    public function parent() : BelongsTo
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(OrchestraHasManyTestModel::class, 'parent_id');
     }
