@@ -29,8 +29,7 @@ class AssociationStubMonomorphic extends AssociationStubBase
      */
     public function isOk(): bool
     {
-
-        $isOk = parent::isOk();
+        $isOk        = parent::isOk();
         $stringCheck = [$this->targType, $this->foreignFieldName];
         $checkResult = array_filter($stringCheck, [$this, 'checkStringInput']);
         $isOk &= $stringCheck == $checkResult;

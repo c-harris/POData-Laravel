@@ -588,7 +588,7 @@ class IronicSerialiser implements IObjectSerialiser
                 $this->expandNavigationProperty($entryObject, $prop, $nuLink, $propKind, $propName);
             }
             $nuLink->isExpanded = isset($nuLink->expandedResult);
-            $links[] = $nuLink;
+            $links[]            = $nuLink;
         }
         return $links;
     }
