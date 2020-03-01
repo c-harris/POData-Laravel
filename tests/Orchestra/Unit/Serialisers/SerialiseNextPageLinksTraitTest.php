@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: alex
  * Date: 29/02/20
- * Time: 1:31 AM
+ * Time: 1:31 AM.
  */
-
 namespace AlgoWeb\PODataLaravel\Orchestra\Tests\Unit\Serialisers;
 
 use AlgoWeb\PODataLaravel\Orchestra\Tests\Serialisers\DummyIronicSerialiser;
