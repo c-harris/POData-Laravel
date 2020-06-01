@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Legacy\AlgoWeb\PODataLaravel\Unit\Providers;
 
+use AlgoWeb\PODataLaravel\Providers\OdataSimpleMetadata;
 use Mockery as m;
 use Tests\Legacy\AlgoWeb\PODataLaravel\Facets\Models\MetadataProviderDummy;
 use Tests\Legacy\AlgoWeb\PODataLaravel\Facets\Models\TestModelTrait;
@@ -18,7 +19,7 @@ class MetadataProviderClassTest extends TestCase
     {
         // make sure that a trait that uses MetadataTrait (eg, extends it) doesn't get loaded on its own
         // as PHP gets rather annoyed when you try to do so
-        $foo = m::mock(MetadataProviderDummy::class)->makePartial();
+        $foo = m::mock(OdataSimpleMetadata::class)->makePartial();
 
         $result     = $foo->getCandidateModels();
         $traitClass = TestModelTrait::class;

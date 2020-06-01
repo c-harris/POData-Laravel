@@ -7,6 +7,7 @@ namespace Tests\Legacy\AlgoWeb\PODataLaravel\Unit\Serialisers;
 use AlgoWeb\PODataLaravel\Models\MetadataRelationshipContainer;
 use AlgoWeb\PODataLaravel\Models\ModelReflectionHelper;
 use AlgoWeb\PODataLaravel\Providers\MetadataProvider;
+use AlgoWeb\PODataLaravel\Providers\OdataSimpleMetadata;
 use AlgoWeb\PODataLaravel\Query\LaravelQuery;
 use AlgoWeb\PODataLaravel\Serialisers\IronicSerialiser;
 use AlgoWeb\PODataLaravel\Serialisers\ModelSerialiser;
@@ -87,13 +88,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestModel::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -153,13 +150,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestModel::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -229,13 +222,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicSource::class, TestMonomorphicTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -298,14 +287,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicSource::class, TestMonomorphicTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
-
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
         $meta = App::make('metadata');
 
         $query = m::mock(LaravelQuery::class);
@@ -367,13 +351,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicSource::class, TestMonomorphicTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -479,14 +459,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestModel::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
-
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
         $meta = App::make('metadata');
 
         $query = m::mock(LaravelQuery::class);
@@ -553,13 +528,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicManySource::class, TestMonomorphicManyTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -655,13 +626,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicSource::class, TestMonomorphicTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -897,14 +864,10 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder  = new MetadataRelationshipContainer();
         $classen = [TestMorphManySource::class, TestMorphTarget::class];
         shuffle($classen);
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -990,14 +953,10 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder  = new MetadataRelationshipContainer();
         $classen = [TestMonomorphicParentOfMorphTarget::class, TestMorphTarget::class];
         shuffle($classen);
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -1085,13 +1044,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicSource::class, TestMonomorphicTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 
@@ -1177,13 +1132,9 @@ class SerialiserWriteElementTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $holder   = new MetadataRelationshipContainer();
         $classen  = [TestMonomorphicSource::class, TestMonomorphicTarget::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
 

@@ -7,6 +7,7 @@ namespace Tests\Legacy\AlgoWeb\PODataLaravel\Unit\Serialisers;
 use AlgoWeb\PODataLaravel\Models\MetadataGubbinsHolder;
 use AlgoWeb\PODataLaravel\Models\MetadataRelationshipContainer;
 use AlgoWeb\PODataLaravel\Providers\MetadataProvider;
+use AlgoWeb\PODataLaravel\Providers\OdataSimpleMetadata;
 use AlgoWeb\PODataLaravel\Query\LaravelQuery;
 use AlgoWeb\PODataLaravel\Serialisers\IronicSerialiser;
 use Illuminate\Support\Facades\App;
@@ -313,7 +314,6 @@ class SerialiserWriteBagTest extends SerialiserTestBase
      */
     private function setUpDataServiceDeps($request)
     {
-        $holder            = new MetadataRelationshipContainer();
         $metadata          = [];
         $metadata['id']    = ['type' => 'integer', 'nullable' => false, 'fillable' => false, 'default' => null];
         $metadata['name']  = ['type' => 'string', 'nullable' => false, 'fillable' => true, 'default' => null];
@@ -331,15 +331,10 @@ class SerialiserWriteBagTest extends SerialiserTestBase
         Cache::shouldReceive('forget')->withArgs(['metadata'])->andReturn(null);
         Cache::shouldReceive('forget')->withArgs(['objectmap'])->andReturn(null);
 
-        $classen  = [TestModel::class];
-        $metaProv = m::mock(MetadataProvider::class)->makePartial()->shouldAllowMockingProtectedMethods();
-        $metaProv->shouldReceive('getRelationHolder')->andReturn($holder);
-        $metaProv->shouldReceive('getCandidateModels')->andReturn($classen);
-        self::resetMetadataProvider($metaProv);
-        $metaProv->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', [TestModel::class]);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $meta = App::make('metadata');
-
         $query = m::mock(LaravelQuery::class);
         return [$host, $meta, $query];
     }

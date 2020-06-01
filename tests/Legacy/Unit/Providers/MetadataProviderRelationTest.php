@@ -8,6 +8,7 @@ use AlgoWeb\PODataLaravel\Models\MetadataGubbinsHolder;
 use AlgoWeb\PODataLaravel\Models\MetadataRelationshipContainer;
 use AlgoWeb\PODataLaravel\Models\ObjectMap\Map;
 use AlgoWeb\PODataLaravel\Providers\MetadataProvider;
+use AlgoWeb\PODataLaravel\Providers\OdataSimpleMetadata;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
@@ -215,9 +216,8 @@ class MetadataProviderRelationTest extends TestCase
         }
 
         $app = App::make('app');
-        $foo = new MetadataProviderDummy($app);
-        $foo->setCandidateModels($classen);
-        $foo->boot();
+        $metaProv = new OdataSimpleMetadata('Data', 'Data', $classen);
+        $this->app->/* @scrutinizer ignore-call */instance('metadata', $metaProv);
 
         $metadata  = App::make('metadata');
         $targAssoc = 'TestMorphManySource_morphTarget_TestMorphTarget';
